@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Converter</title>
+    <link rel="icon" type="image" href="redleaf.png" />
+    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href="Coloris-0.24.0/dist/coloris.min.css"/>
+    <script src="Coloris-0.24.0/dist/coloris.min.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="leaves">
+        <img src="redleaf.png">
+        <img src="orangeleaf.png">
+        <img src="yellowleaf.png">
+        <img src="greenleaf.png">
+        <img src="redleaf.png">
+        <img src="orangeleaf.png">
+        <img src="yellowleaf.png">
+        <img src="greenleaf.png">
+    </div>
+    <div class="dropdown" id="dropdown">
+    <button class="dropbtn">Theme</button>
+    <div class="dropdown-content">
+        <button class="theme" onclick="changeCol('white','black')">Light</button>
+        <Button class="theme" onclick="changeCol('black','white')">Dark</Button>
+        <button class="theme" onclick="changeCol('black','red')">Original</button>
+        <button class="theme" onclick="openForm()">Custom</button>
+        <button class="theme" onclick="DBZ(true)">Jay</a>
+            <button class="theme" onclick="DBZ(false, 'fw.png')">fw</a>
+        <button class="theme" onclick="DBZ(false, 'japan.gif')">*</a>
+    </div>
+</div>
+    
+    <div class="form-popup" id="myForm">
+        <form class="form-container">
+            <div class="sub-container" style="display: flex;">
+
+                <div class="col1">
+                    <div>
+                        <label for="buttoncol" style="color: black;"><b>Button Background</b></label><br>
+                        <input type="text" id="buttoncol" name="buttoncol" data-coloris><br>
+                        <label for="buttoncoll" style="color: black;"><b>Button Text</b></label><br>
+                        <input type="text" id="buttoncoll" name="buttoncoll" data-coloris><br>
+                    </div>
+                    <div>
+                        <label for="box1col" style="color: black;"><b>Box Background</b></label><br>
+                        <input type="text" id="box1col" name="box1col" data-coloris><br>
+                        <label for="box11col" style="color: black;"><b>Box Text</b></label><br>
+                        <input type="text" id="box11col" name="box11col" data-coloris><br>
+                    </div>
+                    <div>
+                        <label for="popupcol" style="color: black;"><b>Popup Background</b></label><br>
+                        <input type="text" id="popupcol" name="popupcol" data-coloris><br>
+                        <label for="popupcoll" style="color: black;"><b>Popup Text</b></label><br>
+                        <input type="text" id="popupcoll" name="popupcoll" data-coloris><br>
+                    </div>
+                </div>
+    
+                <div class="col2">
+                    <div>
+                        <label for="pgraphcol" style="color: black;"><b>Line Count</b></label><br>
+                        <input type="text" id="pgraphcol" name="pgraphcol" data-coloris><br>
+                    </div>
+                    <div>
+                        <label for="inputcol" style="color: black;"><b>Input Background</b></label><br>
+                        <input type="text" id="inputcol" name="inputcol" data-coloris><br>
+                        <label for="inputcoll" style="color: black;"><b>Input Text</b></label><br>
+                        <input type="text" id="inputcoll" name="inputcoll" data-coloris><br>
+                    </div>
+                    <div>
+                        <label for="labelcol" style="color: black;"><b>Order# Text</b></label><br>
+                        <input type="text" id="labelcol" name="labelcol" data-coloris><br>
+                    </div>
+                    <div>
+                        <label for="bgroundcol" style="color: black;"><b>Background</b></label><br>
+                        <input type="text" id="bgroundcol" name="bgroundcol" data-coloris><br>
+                    </div>
+                </div>
+
+            </div>
+            
+            
+        
+            
+            
+            <button type="button" class="btn" onclick="custom()" style="width: 100%; background-color: lightgray; color: black">Submit</button><br>
+            <button type="button" class="btn cancel" onclick="closeForm()" style="width: 100%; background-color: lightgray; color: black">Cancel</button>
+        </form>
+        
+    </div>
+    <div style="margin-left: auto; margin-right: auto; display: block; width: 10%;">
+        <a href="https://thingspace.verizonwireless.com/Portal/manage/dashboard" target="_blank" rel="noopener noreferrer"><img class="fello" src="verizon.jpg"></a>
+        <a href="https://business.apple.com/#/main/users" target="_blank" rel="noopener noreferrer"><img class="fello" src="apple.png"></a>
+        <a href="https://a.simplemdm.com/admin/v2/devices?group=&order=&orderD=desc&page=0&per=100&saveQuery=true&search=" target="_blank" rel="noopener noreferrer"><img class="fello" src="mdm.png"></a>
+    </div>
+    
+    
+
+    <h1 style="color: #7f7f7f; font-size: 32px; margin-top: 10px; text-align: center;">Convert Column to Comma Separated List</h1>
+    <img id="main" src="anakin.jpg" style="height: 325px; display: block; margin-left: auto; margin-right: auto; width: 30%; border-radius: 16px; margin-bottom: 20px;">
+    <div id="snackbar">Copied to clipboard</div>
+    
+    <div id="added">+1 Added</div>
+    <div id="removed">-1 Removed</div>
+    <img onclick="createForm()" src="plus.jpg" style="cursor: pointer; height: 20px;display: block; margin-left: auto; margin-right: auto; width: 23px; margin-bottom: 15px;" >
+    
+    <div id="magic" style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+        
+        <div class="node0" style="margin-top: 25px;">
+            <div class="info">
+                <label for="order"><b>Order Number: </b></label><br>
+                <input type="text" name="order" id="order" placeholder="SQ1234"><br>
+                <button onclick="edit(order)">Edit</button>
+                <button onclick="checkout(order)">Checkout</button>
+                <button onclick="copyCSV(boxx)">CopyCSV</button>
+            </div>
+            
+            <div style="display: flex;">
+                <textarea id="box" cols="20" rows="30" placeholder="Enter (or paste) your column of data here"></textarea>
+                <textarea id="boxx" cols="20" rows="30"  placeholder="Your comma separated list of data will appear here"></textarea>
+            </div>
+            
+            <div id="line">
+                <p>Line Count: </p>
+                <p id="count1"></p>
+            </div>
+            
+        </div>
+
+        <!-- <div>
+
+            <div class="info">
+                <label for="order1"><b>Order Number: </b></label><br>
+                <input type="text" name="order1" id="order1" placeholder="SQ1234"><br>
+                <button onclick="edit(order1)">Edit</button>
+                <button onclick="checkout(order1)">Checkout</button>
+                <button onclick="copyCSV(boxx2)">CopyCSV</button>
+            </div>
+            <textarea id="box2" cols="20" rows="30"  placeholder="Enter (or paste) your column of data here"></textarea>
+            <textarea id="boxx2" cols="20" rows="30"  placeholder="Your comma separated list of data will appear here"></textarea>
+            <div id="line">
+                <p>Line Count: </p>
+                <p id="count2"></p>
+            </div>
+
+        </div>
+
+        <div>
+
+            <div class="info">
+                <label for="order2"><b>Order Number: </b></label><br>
+                <input type="text" name="order2" id="order2" placeholder="SQ1234"><br>
+                <button onclick="edit(order2)">Edit</button>
+                <button onclick="checkout(order2)">Checkout</button>
+                <button onclick="copyCSV(boxx3)">CopyCSV</button>
+            </div>
+            <textarea id="box3" cols="20" rows="30" placeholder="Enter (or paste) your column of data here"></textarea>
+            <textarea id="boxx3" cols="20" rows="30"  placeholder="Your comma separated list of data will appear here"></textarea>
+            <div id="line">
+                <p>Line Count: </p>
+                <p id="count3"></p>
+            </div>
+
+        </div> -->
+        
+    </div>
+    
+    <!-- <label for="profile"><b>Profile Pic: </b></label><br> -->
+     <div style="display: flex;">
+        <input type="text" name="profile" id="profile" style="display: none; width: 500px;"><br>
+        <button id="showbutton" onclick="show()">Show</button>
+        <button id="swap"onclick="imageSwap()">Image Swap</button>
+        <button id="remove"onclick="remove()">Remove</button>
+     </div>
+    
+</body>
+</html>
+
+
