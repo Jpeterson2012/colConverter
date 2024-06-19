@@ -8,7 +8,6 @@ let linecount = null
 let inputb = null
 let inputt = null
 let ordert = null
-// let bground = null
 
 window.addEventListener("DOMContentLoaded", (event) => {
     const input = document.getElementById("box")
