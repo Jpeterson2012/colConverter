@@ -1,6 +1,11 @@
 body{
     background: linear-gradient(95deg, #972c2c, black);
     font-family: sans-serif;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }
 .fello{
   height: 30px;
