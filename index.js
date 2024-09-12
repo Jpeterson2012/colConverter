@@ -84,6 +84,10 @@ function DBZ(param, url){
     Array.from(document.getElementsByTagName("p"))
     .map(b =>  b.style.color = 'white' )
 }
+function eraseText(param1,param2){
+    document.getElementById(param1.id).value = "";
+    document.getElementById(param2.id).value = "";
+}
 function copyCSV(param) {
     if (param === 'removed' || param === 'added'){
         var x = document.getElementById(param);
@@ -290,7 +294,7 @@ function createForm(){
     let val = document.createElement("label")
     val.htmlFor = "order" + count
     val2.append(val)
-    let node = document.createTextNode("Order Number: ")
+    let node = document.createTextNode("Order#: ")
     let val3 = document.createElement("b")
     val.style.color = ordert ? ordert : 'white'
     val3.append(node)
@@ -304,6 +308,18 @@ function createForm(){
     val2.append(inputval);
     vegeta ? inputval.style.color = 'white' : inputt ? inputval.style.color = inputt : null
     inputval.style.backgroundColor = inputb ? inputb : null
+
+    val3 = document.createElement("button")
+    val3.addEventListener('click', function(){
+        eraseText(val3,val4)
+    })
+    node = document.createTextNode("Clear")
+    val3.append(node)
+    val3.style.width = '60px';
+    vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
+    val3.style.backgroundColor = buttonb ? buttonb : null
+    vegeta ? val3.style.border = '2px solid white' : null
+    val2.append(val3)
 
     val3 = document.createElement("button")
     val3.addEventListener('click', function(){
@@ -406,4 +422,12 @@ function createForm(){
         }
     }
     count++
+}
+function sumTotal(){
+    let total = 0
+    let a = document.getElementById('subtotal')
+    Array.from(document.querySelectorAll('#line'))
+    .map(b => total += b.children[1].value)
+    a.innerHTML = total
+
 }

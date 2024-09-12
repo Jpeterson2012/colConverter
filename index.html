@@ -98,11 +98,17 @@
         <a style="margin-right: 10px;" href="https://business.apple.com/#/main/users" target="_blank" rel="noopener noreferrer"><img class="fello" src="apple.png" style="border-radius: 16px;"></a>
         <a href="https://a.simplemdm.com/admin/v2/devices?group=&order=&orderD=desc&page=0&per=100&saveQuery=true&search=" target="_blank" rel="noopener noreferrer"><img class="fello" src="mdm.png" style="border-radius: 16px;"></a><br>
     </div>
-    <a href="https://ims.fello.com/items/list" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; justify-content: center;"><h4 style="background-color: white; color: black; width: 150px; margin-left: 15px; border-radius: 16px; text-align: center;">Item Management</h4></a>
+    <div style="display: flex; justify-content: center;">
+        <a href="https://ims.fello.com/items/list" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; justify-content: center;"><h4 style="background-color: white; color: black; width: 150px; margin-left: 15px; border-radius: 16px; text-align: center;">Item Management</h4></a>
+    <a href="https://ims.fello.com/reports" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; justify-content: center;"><h4 style="background-color: white; color: black; width: 150px; margin-left: 15px; border-radius: 16px; text-align: center;">Reports</h4></a>
+    </div>
+    
     
     
 
     <h1 style="color: #7f7f7f; font-size: 32px; margin-top: 10px; text-align: center;">Convert Column to Comma Separated List</h1>
+    <!-- <p id="grandtotal">Total: <p id="subtotal"></p></p> -->
+
     <img id="main" src="anakin.jpg" style="height: 325px; display: block; margin-left: auto; margin-right: auto; width: 30%; border-radius: 16px; margin-bottom: 20px;">
     <div id="snackbar">Copied to clipboard</div>
     
@@ -115,8 +121,9 @@
         
         <div class="node0" style="margin-top: 25px;">
             <div class="info">
-                <label for="order"><b>Order Number: </b></label><br>
+                <label for="order"><b>Order#: </b></label><br>
                 <input type="text" name="order" id="order" placeholder="SQ1234"><br>
+                <button onclick="eraseText(box,boxx)" style="width: 60px;" >Clear</button>
                 <button onclick="edit(order)">Edit</button>
                 <button onclick="checkout(order)">Checkout</button>
                 <button onclick="copyCSV(boxx)">CopyCSV</button>
