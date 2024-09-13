@@ -84,9 +84,10 @@ function DBZ(param, url){
     Array.from(document.getElementsByTagName("p"))
     .map(b =>  b.style.color = 'white' )
 }
-function eraseText(param1,param2){
+function eraseText(param1,param2, param3){
     document.getElementById(param1.id).value = "";
     document.getElementById(param2.id).value = "";
+    document.getElementById(param3.id).value = "";
 }
 function copyCSV(param) {
     if (param === 'removed' || param === 'added'){
@@ -294,7 +295,7 @@ function createForm(){
     let val = document.createElement("label")
     val.htmlFor = "order" + count
     val2.append(val)
-    let node = document.createTextNode("Order#: ")
+    let node = document.createTextNode("Order# ")
     let val3 = document.createElement("b")
     val.style.color = ordert ? ordert : 'white'
     val3.append(node)
@@ -311,7 +312,7 @@ function createForm(){
 
     val3 = document.createElement("button")
     val3.addEventListener('click', function(){
-        eraseText(val3,val4)
+        eraseText(val3,val4,inputval)
     })
     node = document.createTextNode("Clear")
     val3.append(node)
@@ -401,13 +402,13 @@ function createForm(){
     val.style.fontSize = "20px"
     val.style.color = linecount ? linecount : "white"
     
-    val2 = document.createElement("p")
+    let val5 = document.createElement("p")
     node = document.createTextNode("Line Count: ")
-    val2.append(node)
-    val.append(val2)
-    val2 = document.createElement("p")
-    val2.id = "count" + count
-    val.append(val2)
+    val5.append(node)
+    val.append(val5)
+    val5 = document.createElement("p")
+    val5.id = "count" + count
+    val.append(val5)
 
     val_og.append(val)
     // const value = document.getElementById("count4")
@@ -418,16 +419,8 @@ function createForm(){
             temp = temp.toString().replace(/(?!\s+$)\s+/g, ",")
             val4.value = temp
             let arr = val4.value.split(',')
-            val2.innerHTML = arr.length
+            val5.innerHTML = arr.length
         }
     }
     count++
-}
-function sumTotal(){
-    let total = 0
-    let a = document.getElementById('subtotal')
-    Array.from(document.querySelectorAll('#line'))
-    .map(b => total += b.children[1].value)
-    a.innerHTML = total
-
 }
