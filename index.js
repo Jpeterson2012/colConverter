@@ -88,6 +88,9 @@ function eraseText(param1,param2, param3){
     document.getElementById(param1.id).value = "";
     document.getElementById(param2.id).value = "";
     document.getElementById(param3.id).value = "";
+    if (param1.id === 'box'){
+        document.getElementById("count1").innerHTML = "";
+    }
 }
 function copyCSV(param) {
     if (param === 'removed' || param === 'added'){
@@ -310,17 +313,17 @@ function createForm(){
     vegeta ? inputval.style.color = 'white' : inputt ? inputval.style.color = inputt : null
     inputval.style.backgroundColor = inputb ? inputb : null
 
-    val3 = document.createElement("button")
-    val3.addEventListener('click', function(){
-        eraseText(val3,val4,inputval)
-    })
+    let val6 = document.createElement("button")
+    // val6.addEventListener('click', function(){
+    //     eraseText(val3,val4,inputval)
+    // })
     node = document.createTextNode("Clear")
-    val3.append(node)
-    val3.style.width = '60px';
-    vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    val3.style.backgroundColor = buttonb ? buttonb : null
-    vegeta ? val3.style.border = '2px solid white' : null
-    val2.append(val3)
+    val6.append(node)
+    val6.style.width = '60px';
+    vegeta ? val6.style.color = 'white' : buttont ? (val6.style.color = buttont, val6.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
+    val6.style.backgroundColor = buttonb ? buttonb : null
+    vegeta ? val6.style.border = '2px solid white' : null
+    val2.append(val6)
 
     val3 = document.createElement("button")
     val3.addEventListener('click', function(){
@@ -422,5 +425,9 @@ function createForm(){
             val5.innerHTML = arr.length
         }
     }
+    val6.addEventListener('click', function(){
+        eraseText(val3,val4,inputval)
+        val5.innerHTML = "";
+    })
     count++
 }
