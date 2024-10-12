@@ -155,7 +155,7 @@ function custom(){
     var temp2 = document.getElementById("buttoncoll").value
 
     Array.from(document.getElementsByTagName("button"))
-    .map((b,i) => {i < 21 ? null : (temp2 ?  (b.style.color = temp2,buttont = temp2) : null, temp ? (b.style.backgroundColor = temp, buttonb = temp) : null, temp2 ? b.style.border = "2px solid " + temp2 : null)} )
+    .map((b,i) => {i < 22 ? null : (temp2 ?  (b.style.color = temp2,buttont = temp2) : null, temp ? (b.style.backgroundColor = temp, buttonb = temp) : null, temp2 ? b.style.border = "2px solid " + temp2 : null)} )
 
     var temp2 = document.getElementById("bgroundcol").value 
 
@@ -257,7 +257,7 @@ function changeCol(col1,col2){
 
  
     Array.from(document.getElementsByTagName("button"))
-    .map((b,i) => {i < 21 ? null :  (b.style.color = col2, buttont = col2, b.style.backgroundColor = col1, buttonb = col1, col2 === 'red' ? b.style.border = 'none' : b.style.border = "2px solid " + col2)} )
+    .map((b,i) => {i < 22 ? null :  (b.style.color = col2, buttont = col2, b.style.backgroundColor = col1, buttonb = col1, col2 === 'red' ? b.style.border = 'none' : b.style.border = "2px solid " + col2)} )
 
     Array.from(document.getElementsByTagName("input"))
     .map((b,i) => {i < 11 ? null :  (b.style.color = col2, inputt = col2, col1 === 'white' ? (b.style.backgroundColor = 'lightgray', inputb = 'lightgray') : (b.style.backgroundColor = col1, inputb = col1))} )
@@ -332,6 +332,7 @@ function createForm(){
     })
     node = document.createTextNode("Edit")
     val3.append(node)
+    val3.style.width = '55px';
     vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
     val3.style.backgroundColor = buttonb ? buttonb : null
     vegeta ? val3.style.border = '2px solid white' : null

@@ -29,8 +29,9 @@
         <button class="theme" onclick="changeCol('black','red')">Original</button>
         <button class="theme" onclick="openForm()">Custom</button>
         <button class="theme" onclick="DBZ(true)">Jay</a>
-            <button class="theme" onclick="DBZ(false, 'fw.png')">fw</a>
+        <button class="theme" onclick="DBZ(false, 'fw.png')">fw</a>
         <button class="theme" onclick="DBZ(false, 'japan.gif')">*</a>
+        <button class="theme" onclick="DBZ(false, 'autumn.gif')">**</a>
     </div>
 </div>
     
@@ -124,7 +125,7 @@
                 <label for="order"><b>Order# </b></label><br>
                 <input type="text" name="order" id="order" placeholder="SQ1234"><br>
                 <button onclick="eraseText(box,boxx,order)" style="width: 60px;" >Clear</button>
-                <button onclick="edit(order)">Edit</button>
+                <button onclick="edit(order)" style="width: 55px;">Edit</button>
                 <button onclick="checkout(order)">Checkout</button>
                 <button onclick="copyCSV(boxx)">CopyCSV</button>
             </div>

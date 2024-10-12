@@ -99,7 +99,7 @@ label{
     color: white;
 }
 input{
-    width: 90px; height: 30px; background-color: black; font-weight: bold; font-size: large; color: red;
+    width: 115px; height: 30px; background-color: black; font-weight: bold; font-size: large; color: red;
 }
 .info{
     display: flex; 
