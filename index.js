@@ -61,6 +61,10 @@ function DBZ(param, url){
     else{
         document.body.style.backgroundImage = `url(${url})`
         document.body.style.backgroundSize = "cover"
+        if (url == 'autumn.gif'){
+            Array.from(document.getElementsByTagName("iframe"))
+                .map(i => i.removeAttribute("hidden") )
+        }
     }
     
     document.body.style.backgroundColor = 'black'
