@@ -65,6 +65,8 @@ function DBZ(param, url){
             Array.from(document.getElementsByTagName("iframe"))
                 .map(i => i.removeAttribute("hidden") )
         }
+        
+
     }
     
     document.body.style.backgroundColor = 'black'
@@ -157,9 +159,9 @@ function custom(){
     closeForm()
     var temp = document.getElementById("buttoncol").value
     var temp2 = document.getElementById("buttoncoll").value
-
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Array.from(document.getElementsByTagName("button"))
-    .map((b,i) => {i < 22 ? null : (temp2 ?  (b.style.color = temp2,buttont = temp2) : null, temp ? (b.style.backgroundColor = temp, buttonb = temp) : null, temp2 ? b.style.border = "2px solid " + temp2 : null)} )
+    .map((b,i) => {i < 24 ? null : (temp2 ?  (b.style.color = temp2,buttont = temp2) : null, temp ? (b.style.backgroundColor = temp, buttonb = temp) : null, temp2 ? b.style.border = "2px solid " + temp2 : null)} )
 
     var temp2 = document.getElementById("bgroundcol").value 
 
@@ -259,9 +261,9 @@ function changeCol(col1,col2){
     Array.from(document.getElementsByTagName("p"))
     .map(b => col2 === 'black' ? (b.style.color = col2, linecount = col2) : (b.style.color = 'white', linecount = 'white') )
 
- 
+ //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Array.from(document.getElementsByTagName("button"))
-    .map((b,i) => {i < 22 ? null :  (b.style.color = col2, buttont = col2, b.style.backgroundColor = col1, buttonb = col1, col2 === 'red' ? b.style.border = 'none' : b.style.border = "2px solid " + col2)} )
+    .map((b,i) => {i < 24 ? null :  (b.style.color = col2, buttont = col2, b.style.backgroundColor = col1, buttonb = col1, col2 === 'red' ? b.style.border = 'none' : b.style.border = "2px solid " + col2)} )
 
     Array.from(document.getElementsByTagName("input"))
     .map((b,i) => {i < 11 ? null :  (b.style.color = col2, inputt = col2, col1 === 'white' ? (b.style.backgroundColor = 'lightgray', inputb = 'lightgray') : (b.style.backgroundColor = col1, inputb = col1))} )
