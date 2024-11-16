@@ -66,7 +66,7 @@ body{
     }
 }
 .leaves img:nth-child(1){
-    animation-delay: -2s;
+    animation-delay: -2.5s;
     width: 25px;
 }
 .leaves img:nth-child(2){

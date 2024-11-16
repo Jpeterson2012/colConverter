@@ -86,7 +86,9 @@ function DBZ(param, url){
         let temp2 = temp.getElementsByTagName("img")
         console.log(temp2)
         for (let i = 0; i < temp2.length; i++){
-            temp2[i].src = "ravens.jpg"
+            temp2[i].style.width = '55px'
+            if (i % 2 == 0) temp2[i].src = "ravens2.png"
+            else temp2[i].src = "ravens.jpg"
         }
     }
     else{
