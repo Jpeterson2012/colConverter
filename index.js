@@ -24,7 +24,32 @@ window.addEventListener("DOMContentLoaded", (event) => {
             
         }
     }
+    const text = document.getElementById("boxxx")
+    const count2 = document.getElementById("count0")
+    if (text) {
+        text.addEventListener("input", updateValue)
+        function updateValue(e){
+            let temp = e.target.value
+            let temp2 = temp.toString().replace(/,/g, "\n")
+            text.value = temp2
+            let arr2 = text.value.split('\n')
+            count2.innerHTML = arr2.length
+        }
+    }
 })
+function hideRemoval(){
+    var text = document.getElementById("removal")
+    var buttonsrc = document.getElementById("removebutton")
+    if (buttonsrc.innerHTML === "Hide"){
+    buttonsrc.innerHTML="Show"
+    text.hidden = true
+    }
+    else{
+        buttonsrc.innerHTML="Hide"
+        text.hidden = false
+    }
+}
+
 var vegeta = false
 function DBZ(param, url){
     //Remove bottom buttons
@@ -57,6 +82,12 @@ function DBZ(param, url){
     if (param){
         document.body.style.backgroundImage = "url('vegeta.jpg')"
         document.body.style.backgroundSize = "contain"
+        let temp = document.getElementById("leaves")
+        let temp2 = temp.getElementsByTagName("img")
+        console.log(temp2)
+        for (let i = 0; i < temp2.length; i++){
+            temp2[i].src = "ravens.jpg"
+        }
     }
     else{
         document.body.style.backgroundImage = `url(${url})`
@@ -89,13 +120,30 @@ function DBZ(param, url){
 
     Array.from(document.getElementsByTagName("p"))
     .map(b =>  b.style.color = 'white' )
+
+    buttonb = null
+    buttont = null
+    boxb = null
+    boxt = null
+    popupb = null
+    popupt = null
+    linecount = null
+    inputb = null
+    inputt = null
+    ordert = null
 }
 function eraseText(param1,param2, param3){
-    document.getElementById(param1.id).value = "";
-    document.getElementById(param2.id).value = "";
-    document.getElementById(param3.id).value = "";
-    if (param1.id === 'box'){
-        document.getElementById("count1").innerHTML = "";
+    if (param1.id == 'boxxx'){
+        document.getElementById(param1.id).value = "";
+        document.getElementById("count0").innerHTML = "";
+    }
+    else{
+        document.getElementById(param1.id).value = "";
+        document.getElementById(param2.id).value = "";
+        document.getElementById(param3.id).value = "";
+        if (param1.id === 'box'){
+            document.getElementById("count1").innerHTML = "";
+        }
     }
 }
 function copyCSV(param) {
@@ -155,6 +203,7 @@ function remove(){
 }
 var textBox = []
     textBox.push("box")
+    textBox.push("boxxx")
 function custom(){
     closeForm()
     var temp = document.getElementById("buttoncol").value

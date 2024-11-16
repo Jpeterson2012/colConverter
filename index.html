@@ -11,7 +11,7 @@
     <script src="index.js"></script>
 </head>
 <body>
-    <div class="leaves">
+    <div id="leaves" class="leaves">
         <img src="redleaf.png">
         <img src="orangeleaf.png">
         <img src="yellowleaf.png">
@@ -112,7 +112,7 @@
     
     
 
-    <h1 style="color: #7f7f7f; font-size: 32px; margin-top: 10px; text-align: center;">Convert Column to Comma Separated List</h1>
+    <!-- <h1 style="color: #7f7f7f; font-size: 32px; margin-top: 10px; text-align: center;">Convert Column to Comma Separated List</h1> -->
     <!-- <p id="grandtotal">Total: <p id="subtotal"></p></p> -->
 
     <img id="main" src="anakin.jpg" style="height: 325px; display: block; margin-left: auto; margin-right: auto; width: 30%; border-radius: 16px; margin-bottom: 20px;">
@@ -120,7 +120,12 @@
     
     <div id="added">+1 Added</div>
     <div id="removed">-1 Removed</div>
-    <img onclick="createForm()" src="plus.jpg" style="cursor: pointer; height: 20px;display: block; margin-left: auto; margin-right: auto; width: 23px; margin-bottom: 15px;" >
+    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 13px;">
+        <!-- <img onclick="createForm()" src="plus.jpg" style="cursor: pointer; height: 20px;display: block; margin-left: auto; margin-right: auto; width: 23px; margin-bottom: 15px;" > -->
+        <img onclick="createForm()" src="plus.jpg" style="cursor: pointer; height: 20px;width: 23px; margin-right: 10px;" >
+        <button id="removebutton" onclick="hideRemoval()" style="width: 54px; height: 30px; text-align: center;">Hide</button>
+    </div>
+    
     <!-- <div style="display: flex; background-color: white; color: black; width: 95px; align-items: center; height: 30px;"><h3>Total: <h3 id="total"></h3></h3></div> -->
     
     <div id="magic" style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
@@ -135,9 +140,24 @@
                 <button onclick="copyCSV(boxx)">CopyCSV</button>
             </div>
             
-            <div style="display: flex;">
+            <div style="display: flex; margin: 0px; padding: 0px;">
                 <textarea id="box" cols="20" rows="30" placeholder="Enter (or paste) your column of data here"></textarea>
                 <textarea id="boxx" cols="20" rows="30"  placeholder="Your comma separated list of data will appear here"></textarea>
+                <div id="removal">
+                    <div>
+                        <button onclick="eraseText(boxxx)" style="width: 60px;" >Clear</button>
+                        <button onclick="copyCSV(boxxx)" style="width: 60px;">Copy</button>
+                    </div>
+                    <textarea id="boxxx" cols="20" rows="30"  placeholder="The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets 
+                    more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets 
+                    faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound. [ding] Remember to run in a 
+                    straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on 
+                    the word start. On your mark, get ready, start." style="height: 600px;"></textarea>
+                    <div id="line">
+                        <p>Count: </p>
+                        <p id="count0"></p>
+                    </div>
+                </div>
             </div>
             
             <div id="line">
