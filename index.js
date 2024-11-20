@@ -152,7 +152,7 @@ function copyCSV(param) {
     if (param === 'removed' || param === 'added'){
         var x = document.getElementById(param);
         x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 500);
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1500);
     }
     else{
     var copyText = document.getElementById(param.id);
