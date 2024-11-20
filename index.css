@@ -258,7 +258,7 @@ button{
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
   .blob {
-    /* background: black; */
+    background: black;
     border-radius: 50%;
     /* margin: 10px; */
     height: 50px;
