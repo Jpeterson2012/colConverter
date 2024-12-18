@@ -100,6 +100,8 @@ function DBZ(param, url){
                 .map(i => i.removeAttribute("hidden") )
         }
         if (url == 'coffee.gif') {
+            if (window.outerHeight > 1000) document.body.style.height = "100vh"
+            else document.body.style.height = "100%"
             window.addEventListener('resize', () => {
                 if (window.outerHeight > 1000) document.body.style.height = "100vh"
                 else document.body.style.height = "100%"
