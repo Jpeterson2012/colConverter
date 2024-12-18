@@ -98,6 +98,15 @@ function DBZ(param, url){
             Array.from(document.getElementsByTagName("iframe"))
                 .map(i => i.removeAttribute("hidden") )
         }
+        if (url == 'coffee.gif' || url == 'winter.webp'){
+            let temp = document.getElementById("leaves")
+            let temp2 = temp.getElementsByTagName("img")
+            for (let i = 0; i < temp2.length; i++){
+                temp2[i].style.width = '40px'
+                if (i % 2 == 0) temp2[i].src = "candy-canes.png"
+                else temp2[i].src = "gift-box.png"
+            }
+        }
         
 
     }
