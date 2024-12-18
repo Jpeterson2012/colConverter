@@ -10,6 +10,7 @@ let inputt = null
 let ordert = null
 
 window.addEventListener("DOMContentLoaded", (event) => {
+    console.log(window.outerHeight)
     const input = document.getElementById("box")
     const log = document.getElementById("boxx")
     const count = document.getElementById("count1")
@@ -97,6 +98,12 @@ function DBZ(param, url){
         if (url == 'autumn.gif'){
             Array.from(document.getElementsByTagName("iframe"))
                 .map(i => i.removeAttribute("hidden") )
+        }
+        if (url == 'coffee.gif') {
+            window.addEventListener('resize', () => {
+                if (window.outerHeight > 1000) document.body.style.height = "100vh"
+                else document.body.style.height = "100%"
+            })
         }
         if (url == 'coffee.gif' || url == 'winter.webp'){
             let temp = document.getElementById("leaves")
