@@ -12,22 +12,22 @@ let ordert = null
 function duplicate(a){
     const alreadySeen = {}
     let set = new Set()
-    let setArray
-    let x
+    let x = document.getElementById("snackbar2")
     let closeOut = document.getElementById("snackButton")
     let boxText = document.getElementById("boxxxx")
     
     a.forEach(str => alreadySeen[str] ? set.add(str) : alreadySeen[str] = true)
+    let setArray = [...set]
+    
     set.size == 0 ? console.log("No duplicates found") : (
-        setArray = [...set],
         boxText.value = setArray.join('\n'),
 
-        x = document.getElementById("snackbar2"),
         x.className = "show",
         closeOut.addEventListener("click", (() => {
             x.className = x.className.replace("show", "");
         }))
     )
+    if (setArray.join('\n') == "") x.className = x.className.replace("show", "");
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -54,6 +54,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
             let temp2 = temp.toString().replace(/,/g, "\n")
             text.value = temp2
             let arr2 = text.value.split('\n')
+            //allows the count to only utilize actual text, instead of black spaces from newline chars
+            arr2 = arr2.filter(a => a != '')
             count2.innerHTML = arr2.length
             setTimeout(()=>{
                 duplicate(arr2)
