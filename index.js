@@ -9,6 +9,38 @@ let inputb = null
 let inputt = null
 let ordert = null
 
+function duplicate(a){
+    const alreadySeen = {}
+    let set = new Set()
+    let b
+    let x
+    let y = document.getElementById("snackButton")
+    y.addEventListener("click", (() => {
+        x.className = x.className.replace("show", "");
+    }))
+    let z = document.getElementById("boxxxx")
+    let c
+     
+    a.forEach((str,i) => alreadySeen[str] ? set.add(str) : alreadySeen[str] = true)
+    set.size == 0 ? console.log("No duplicates found") : (
+        b = [...set],
+        x = document.getElementById("snackbar2"),
+        // x.value = b.join("\n"),
+        c = b.join('\n'),
+        console.log(c),
+        z.value = c,
+        x.className = "show",
+        y.addEventListener("click", (() => {
+            x.className = x.className.replace("show", "");
+        })),
+        // setTimeout(function(){ x.className = x.className.replace("show", ""); }, 10000),
+    
+
+    console.log("Duplicates below:"),
+    set.forEach((value) => console.log(value))
+    )
+}
+
 window.addEventListener("DOMContentLoaded", (event) => {
     console.log(window.outerHeight)
     const input = document.getElementById("box")
@@ -35,6 +67,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
             text.value = temp2
             let arr2 = text.value.split('\n')
             count2.innerHTML = arr2.length
+            setTimeout(()=>{
+                duplicate(arr2)
+            },500)
+            
         }
     }
 })
@@ -67,6 +103,9 @@ function DBZ(param, url){
 
     //Popup
     temp2 = document.getElementById("snackbar")
+    temp2.style.backgroundColor = 'black'
+    temp2.style.color = 'white'
+    temp2 = document.getElementById("snackbar2")
     temp2.style.backgroundColor = 'black'
     temp2.style.color = 'white'
     temp2 = document.getElementById("added")
@@ -224,13 +263,14 @@ function remove(){
 var textBox = []
     textBox.push("box")
     textBox.push("boxxx")
+    textBox.push("boxxxx")
 function custom(){
     closeForm()
     var temp = document.getElementById("buttoncol").value
     var temp2 = document.getElementById("buttoncoll").value
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Array.from(document.getElementsByTagName("button"))
-    .map((b,i) => {i < 24 ? null : (temp2 ?  (b.style.color = temp2,buttont = temp2) : null, temp ? (b.style.backgroundColor = temp, buttonb = temp) : null, temp2 ? b.style.border = "2px solid " + temp2 : null)} )
+    .map((b,i) => {i < 26 ? null : (temp2 ?  (b.style.color = temp2,buttont = temp2) : null, temp ? (b.style.backgroundColor = temp, buttonb = temp) : null, temp2 ? b.style.border = "2px solid " + temp2 : null)} )
 
     var temp2 = document.getElementById("bgroundcol").value 
 
@@ -252,6 +292,9 @@ function custom(){
     var temp3 = document.getElementById("popupcoll").value
 
     var temp = document.getElementById("snackbar")
+    temp2 ? (temp.style.backgroundColor = temp2, popupb = temp2) : null
+    temp3 ? (temp.style.color = temp3, popupt = temp3) : null
+    var temp = document.getElementById("snackbar2")
     temp2 ? (temp.style.backgroundColor = temp2, popupb = temp2) : null
     temp3 ? (temp.style.color = temp3, popupt = temp3) : null
     var temp = document.getElementById("added")
@@ -310,6 +353,12 @@ function changeCol(col1,col2){
     else temp.style.background = col1
 
     temp = document.getElementById("snackbar")
+    temp.style.backgroundColor = col1
+    popupb = col1
+    temp.style.color = col2
+    popupt = col2
+
+    temp = document.getElementById("snackbar2")
     temp.style.backgroundColor = col1
     popupb = col1
     temp.style.color = col2
