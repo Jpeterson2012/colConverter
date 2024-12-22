@@ -29,7 +29,7 @@ body{
     color: red;
     font-size: 20px;
     width: 190px;
-    height: 300px;
+    height: 250px;
 }
 #boxx{
     width: 160px; 
@@ -166,8 +166,8 @@ button{
     padding: 16px; /* Padding */
     position: fixed; /* Sit on top of the screen */
     z-index: 1; /* Add a z-index if needed */
-    left: 50%; /* Center the snackbar */
-    bottom: 170px; /* 30px from the bottom */
+    left: 90%; /* Center the snackbar */
+    bottom: 0; /* 30px from the bottom */
   }
   
   /* Show the snackbar when clicking on a button (class added with JavaScript) */
