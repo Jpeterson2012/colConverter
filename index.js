@@ -190,6 +190,8 @@ function eraseText(param1,param2, param3){
     if (param1.id == 'boxxx'){
         document.getElementById(param1.id).value = "";
         document.getElementById("count0").innerHTML = "";
+        let x = document.getElementById("snackbar2")
+        x.className = x.className.replace("show", "")
     }
     else{
         document.getElementById(param1.id).value = "";
