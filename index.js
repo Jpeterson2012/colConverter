@@ -719,6 +719,8 @@ window.addEventListener("beforeunload", (event) => {
     localStorage.setItem("items", JSON.stringify(arr))
     localStorage.setItem("huh","huh")
 
+    let alert = driver.switchTo().alert()
+    alert.accept()
     event.preventDefault()
     event.returnValue = ''
 })
