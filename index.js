@@ -47,7 +47,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
         else{            
             localVals.map((a,i) => {
-                console.log(a)
+                // console.log(a)
                 if (i === 0){
                     input.value = a.data
                     document.getElementById('order').value = a.orderNum
@@ -109,12 +109,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
 function hideRemoval(){
     var text = document.getElementById("removal")
     var buttonsrc = document.getElementById("removebutton")
-    if (buttonsrc.innerHTML === "Hide"){
-    buttonsrc.innerHTML="Show"
+    console.log(buttonsrc.src)
+    if (text.hidden === false){
+    buttonsrc.src = './button/show.png'
     text.hidden = true
     }
     else{
-        buttonsrc.innerHTML="Hide"
+        buttonsrc.src = './button/hide.png'
         text.hidden = false
     }
 }
@@ -445,7 +446,7 @@ function createForm(){
 
     let exit = document.createElement("img")
     exit.src = 'close.png'
-    exit.style.width = '15px'
+    exit.style.width = '19px'
     exit.style.marginLeft = '50%';
     exit.style.cursor = 'pointer';
     exit.style.marginBottom = '10px';
@@ -481,44 +482,105 @@ function createForm(){
     vegeta ? inputval.style.color = 'white' : inputt ? inputval.style.color = inputt : null
     inputval.style.backgroundColor = inputb ? inputb : null
 
-    let val6 = document.createElement("button")
-    // val6.addEventListener('click', function(){
-    //     eraseText(val3,val4,inputval)
-    // })
-    node = document.createTextNode("Clear")
-    val6.append(node)
-    val6.style.width = '60px';
-    vegeta ? val6.style.color = 'white' : buttont ? (val6.style.color = buttont, val6.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    val6.style.backgroundColor = buttonb ? buttonb : null
-    vegeta ? val6.style.border = '2px solid white' : null
-    val2.append(val6)
+    // let val6 = document.createElement("button")
+    // // val6.addEventListener('click', function(){
+    // //     eraseText(val3,val4,inputval)
+    // // })
+    // node = document.createTextNode("Clear")
+    // val6.append(node)
+    // val6.style.width = '60px';
+    // vegeta ? val6.style.color = 'white' : buttont ? (val6.style.color = buttont, val6.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
+    // val6.style.backgroundColor = buttonb ? buttonb : null
+    // vegeta ? val6.style.border = '2px solid white' : null
+    // val2.append(val6)
 
-    val3 = document.createElement("button")
+    // val3 = document.createElement("button")
+    // val3.addEventListener('click', function(){
+    //     if (inputval.value) window.open('https://ims.fello.com/order/edit/' + inputval.value, '_blank')
+    //     else null
+    // })
+    // node = document.createTextNode("Edit")
+    // val3.append(node)
+    // val3.style.width = '55px';
+    // vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
+    // val3.style.backgroundColor = buttonb ? buttonb : null
+    // vegeta ? val3.style.border = '2px solid white' : null
+    // val2.append(val3)
+
+    // val3 = document.createElement("button")
+    // val3.addEventListener('click', function(){
+    //     if (inputval.value) window.open('https://ims.fello.com/checking-out/' + inputval.value, '_blank')
+    //     else null
+    // })
+    // node = document.createTextNode("Checkout")
+    // val3.append(node)
+    // vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
+    // val3.style.backgroundColor = buttonb ? buttonb : null
+    // vegeta ? val3.style.border = '2px solid white' : null
+    // val2.append(val3)
+
+    // val3 = document.createElement("button")
+    // val3.addEventListener('click', function(){
+    //     val4.select();
+    //     val4.setSelectionRange(0, 99999);
+    //     navigator.clipboard.writeText(val4.value);
+    //     var x = document.getElementById("snackbar");
+    //     x.className = "show";
+    //     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    // })
+    // node = document.createTextNode("CopyCSV")
+    // val3.append(node)
+    // vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
+    // val3.style.backgroundColor = buttonb ? buttonb : null
+    // vegeta ? val3.style.border = '2px solid white' : null
+    // val2.append(val3)
+    let val7 = document.createElement("div")
+    val7.style.display = "flex"
+    val7.style.background = "white"
+    val7.style.width = "296px"
+    val7.style.justifyContent = "space-between"
+    val7.style.borderRadius = "16px"
+    //Clear Img
+    let val6 = document.createElement("img")
+    val6.addEventListener('click', function(){
+        eraseText(val3,val4,inputval)
+    })
+    // val6.classList.add("textButton")
+    val6.src = './button/clear.png'
+    val6.style.width = "45px"
+    val6.style.height = "auto"
+    val6.style.cursor = "pointer"
+    val6.style.borderRadius = "16px"
+    val7.append(val6)
+    
+    //Edit Image
+    val3 = document.createElement("img")
     val3.addEventListener('click', function(){
         if (inputval.value) window.open('https://ims.fello.com/order/edit/' + inputval.value, '_blank')
         else null
-    })
-    node = document.createTextNode("Edit")
-    val3.append(node)
-    val3.style.width = '55px';
-    vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    val3.style.backgroundColor = buttonb ? buttonb : null
-    vegeta ? val3.style.border = '2px solid white' : null
-    val2.append(val3)
-
-    val3 = document.createElement("button")
+    })    
+    val3.src = './button/edit.png'
+    val3.style.width = "45px"
+    val3.style.height = "auto"
+    val3.style.cursor = "pointer"
+    val3.style.borderRadius = "16px"
+    val7.append(val3)
+    
+    //Checkout Image
+    val3 = document.createElement("img")
     val3.addEventListener('click', function(){
         if (inputval.value) window.open('https://ims.fello.com/checking-out/' + inputval.value, '_blank')
         else null
-    })
-    node = document.createTextNode("Checkout")
-    val3.append(node)
-    vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    val3.style.backgroundColor = buttonb ? buttonb : null
-    vegeta ? val3.style.border = '2px solid white' : null
-    val2.append(val3)
+    })    
+    val3.src = './button/checkout.png'
+    val3.style.width = "45px"
+    val3.style.height = "auto"
+    val3.style.cursor = "pointer"
+    val3.style.borderRadius = "16px"
+    val7.append(val3)
 
-    val3 = document.createElement("button")
+    //Copy CSV Img
+    val3 = document.createElement("img")
     val3.addEventListener('click', function(){
         val4.select();
         val4.setSelectionRange(0, 99999);
@@ -526,13 +588,31 @@ function createForm(){
         var x = document.getElementById("snackbar");
         x.className = "show";
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-    })
-    node = document.createTextNode("CopyCSV")
-    val3.append(node)
-    vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    val3.style.backgroundColor = buttonb ? buttonb : null
-    vegeta ? val3.style.border = '2px solid white' : null
-    val2.append(val3)
+    })    
+    val3.src = './button/copy.png'
+    val3.style.width = "45px"
+    val3.style.height = "auto"
+    val3.style.cursor = "pointer"
+    val3.style.borderRadius = "16px"
+    val7.append(val3)
+
+    val2.append(val7)
+
+    // val3 = document.createElement("button")
+    // val3.addEventListener('click', function(){
+    //     val4.select();
+    //     val4.setSelectionRange(0, 99999);
+    //     navigator.clipboard.writeText(val4.value);
+    //     var x = document.getElementById("snackbar");
+    //     x.className = "show";
+    //     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    // })
+    // node = document.createTextNode("CopyCSV")
+    // val3.append(node)
+    // vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
+    // val3.style.backgroundColor = buttonb ? buttonb : null
+    // vegeta ? val3.style.border = '2px solid white' : null
+    // val2.append(val3)
 
 
     //Text areas start here
