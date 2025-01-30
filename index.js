@@ -202,6 +202,10 @@ function DBZ(param, url){
     document.body.style.backgroundRepeat = "no-repeat"
     document.body.style.backgroundPosition = "center center"
     // document.body.style.width = "100%"
+    Array.from(document.getElementsByClassName('newButtonCont'))
+    .map(b => {b.style.opacity = '0.7'})
+    // Array.from(document.getElementsByClassName("textButton"))
+    // .map(b => {b.style.opacity = '0.5'})
 
     Array.from(document.getElementsByTagName("input"))
     .map(b => {b.style.color = 'white', b.style.backgroundColor = 'black'})
@@ -537,6 +541,8 @@ function createForm(){
     // vegeta ? val3.style.border = '2px solid white' : null
     // val2.append(val3)
     let val7 = document.createElement("div")
+    val7.classList.add('newButtonCont')
+    vegeta ? val7.style.opacity = '0.7' : '1'
     val7.style.display = "flex"
     val7.style.background = "white"
     val7.style.width = "296px"

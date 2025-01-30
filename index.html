@@ -137,7 +137,7 @@
     
     <div id="added">+1 Added</div>
     <div id="removed">-1 Removed</div>
-    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 13px; gap: 40px;">
+    <div class="newButtonCont" style="display: flex; justify-content: center; align-items: center; margin-bottom: 13px; gap: 40px;">
         <!-- <img onclick="createForm()" src="plus.jpg" style="cursor: pointer; height: 20px;display: block; margin-left: auto; margin-right: auto; width: 23px; margin-bottom: 15px;" > -->
         <!-- <img id="createFormButton" onclick="createForm()" src="plus.jpg" style="cursor: pointer; height: 20px;width: 23px; margin-right: 10px;" > -->
         <!-- <button id="removebutton" onclick="hideRemoval()" style="width: 54px; height: 30px; text-align: center;">Hide</button> -->
@@ -157,7 +157,7 @@
                 <button onclick="edit(order)" style="width: 55px;">Edit</button>
                 <button  onclick="checkout(order)">Checkout</button>
                 <button onclick="copyCSV(boxx)">CopyCSV</button> -->
-                <div style="display: flex;background: white; width: 296px; justify-content: space-between; border-radius: 16px;">
+                <div class="newButtonCont" style="display: flex;background: white; width: 296px; justify-content: space-between; border-radius: 16px;">
                     <img src="clear.png" class="textButton" onclick="eraseText(box,boxx,order)">
                     <img src="edit.png" class="textButton" onclick="edit(order)">
                     <img src="checkout.png" class="textButton" onclick="checkout(order)">
@@ -169,7 +169,7 @@
                 <textarea id="box" cols="20" rows="30" placeholder="Enter (or paste) your column of data here"></textarea>
                 <textarea id="boxx" cols="20" rows="30"  placeholder="Your comma separated list of data will appear here"></textarea>
                 <div id="removal">
-                    <div style="display: flex;background: white; width: 166px; justify-content: space-evenly; border-radius: 16px;">
+                    <div class="newButtonCont" style="display: flex;background: white; width: 166px; justify-content: space-evenly; border-radius: 16px;">
                         <!-- <button onclick="eraseText(boxxx)" style="width: 60px;" >Clear</button> -->
                         <!-- <button onclick="copyCSV(boxxx)" style="width: 60px;">Copy</button> -->
                         <img src="clear.png" class="textButton" onclick="eraseText(boxxx)">
