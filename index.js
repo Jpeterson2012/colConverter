@@ -446,10 +446,12 @@ function createForm(){
 
     let exit = document.createElement("img")
     exit.src = 'close.png'
-    exit.style.width = '19px'
+    exit.style.width = '22px'
     exit.style.marginLeft = '50%';
     exit.style.cursor = 'pointer';
     exit.style.marginBottom = '10px';
+    exit.style.background = 'white';
+    exit.style.borderRadius = '16px';
     exit.addEventListener('click', function(){
         val_og.remove()
         let x = textBox.indexOf('box' + insidecount)
@@ -546,7 +548,7 @@ function createForm(){
         eraseText(val3,val4,inputval)
     })
     // val6.classList.add("textButton")
-    val6.src = './button/clear.png'
+    val6.src = 'clear.png'
     val6.style.width = "45px"
     val6.style.height = "auto"
     val6.style.cursor = "pointer"
@@ -559,7 +561,7 @@ function createForm(){
         if (inputval.value) window.open('https://ims.fello.com/order/edit/' + inputval.value, '_blank')
         else null
     })    
-    val3.src = './button/edit.png'
+    val3.src = 'edit.png'
     val3.style.width = "45px"
     val3.style.height = "auto"
     val3.style.cursor = "pointer"
@@ -572,7 +574,7 @@ function createForm(){
         if (inputval.value) window.open('https://ims.fello.com/checking-out/' + inputval.value, '_blank')
         else null
     })    
-    val3.src = './button/checkout.png'
+    val3.src = 'checkout.png'
     val3.style.width = "45px"
     val3.style.height = "auto"
     val3.style.cursor = "pointer"
@@ -589,7 +591,7 @@ function createForm(){
         x.className = "show";
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     })    
-    val3.src = './button/copy.png'
+    val3.src = 'copy.png'
     val3.style.width = "45px"
     val3.style.height = "auto"
     val3.style.cursor = "pointer"
