@@ -32,8 +32,67 @@ function duplicate(a){
 
 window.addEventListener("DOMContentLoaded", (event) => {
     const input = document.getElementById("box")
+    let vals = JSON.parse(localStorage.getItem("items"))
+    let addButton = document.getElementById("createFormButton")    
+    console.log(vals)
+
+    
+    if (vals !== null){
+        if (vals.length === 1){
+            input.value = vals[0].data
+            document.getElementById('order').value = vals[0].val
+        }
+        else{
+            // for(let i = 0; i < vals.length; i++){
+            //     if (i === 0){
+            //         input.value = vals[i].data
+            //         document.getElementById('order').vale = vals.name
+            //     }
+            //     else{
+            //     addButton.click()
+                
+            //     let name = "order" + i
+            //     let name2 = "box" + i
+            //     let temp = document.getElementById(name)
+            //     let temp2 = document.getElementById(name2)
+            //     console.log(vals[i].name)
+            //     console.log(vals[i].data)
+            //     temp.value = vals[i].name
+            //     temp2.value = vals[i].data
+            //     }
+            // }
+
+            vals.map((b,i) => {
+                console.log(b)
+                if (i === 0){
+                    input.value = b.data
+                    document.getElementById('order').value = b.val
+                }
+                else{
+                addButton.click()
+                
+                let name = "order" + i
+                let name2 = "box" + i
+                let temp = document.getElementById(name)
+                let temp2 = document.getElementById(name2)
+                console.log(b.val)
+                console.log(b.data)
+                temp.value = b.val
+                temp2.value = b.data
+                }
+            })
+        }
+
+
+
+        // input.value = vals.box
+        // addButton.click()
+        // let temp2 = document.getElementById("box1")
+        // temp2.value = vals.box
+    }
+
     const log = document.getElementById("boxx")
-    const count = document.getElementById("count1")
+    const count = document.getElementById("count1")    
     if (input) {
         input.addEventListener("input", updateValue)
         function updateValue(e){
@@ -41,7 +100,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             temp = temp.toString().replace(/(?!\s+$)\s+/g, ",")
             log.value = temp
             let arr = log.value.split(',')
-            count.innerHTML = arr.length
+            count.innerHTML = arr.length            
             
         }
     }
@@ -64,6 +123,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
     }
 })
+
 function hideRemoval(){
     var text = document.getElementById("removal")
     var buttonsrc = document.getElementById("removebutton")
@@ -261,6 +321,10 @@ var textBox = []
     textBox.push("box")
     textBox.push("boxxx")
     textBox.push("boxxxx")
+var orderBox = []
+orderBox.push("order")
+orderBox.push("orderrr")
+orderBox.push("orderrr")
 function custom(){
     closeForm()
     var temp = document.getElementById("buttoncol").value
@@ -429,6 +493,7 @@ function createForm(){
     inputval.type = 'text'
     inputval.name = 'order' + count
     inputval.id = 'order' + count
+    orderBox.push(inputval.id)
     inputval.placeholder = 'SQ1234'
     val2.append(inputval);
     vegeta ? inputval.style.color = 'white' : inputt ? inputval.style.color = inputt : null
@@ -553,3 +618,31 @@ function createForm(){
     })
     count++
 }
+
+window.addEventListener("beforeunload", (event) => {
+    localStorage.clear()
+
+    
+    let arr = []
+
+    // let items = {"box": input.value}
+    let num = 1
+    for(let i = 0; i < textBox.length; i++){
+        if (textBox[i] === 'boxxx' || textBox[i] === 'boxxxx') null
+        else{
+            let temp = document.getElementById(textBox[i])
+            // let a = Number(textBox[i].match(/\d+/)[0]) === null ? 'notfound' : Number(textBox[i].match(/\d+/)[0])
+            // let temp2 = document.getElementById(`order${a}`).value === null ? "box" : document.getElementById(`order${a}`).value             
+            let val = document.getElementById(orderBox[i])
+            
+            arr.push({ name:  "name", data: temp.value, val: val.value})            
+        }
+        num++
+    }
+    
+    localStorage.setItem("items", JSON.stringify(arr))
+    localStorage.setItem("huh","huh")
+
+    event.preventDefault()
+    event.returnValue = ''
+})
