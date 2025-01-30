@@ -31,64 +31,46 @@ function duplicate(a){
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
+    //Localstorage retrieval in case page closed by accident
     const input = document.getElementById("box")
-    let vals = JSON.parse(localStorage.getItem("items"))
+    let localVals = JSON.parse(localStorage.getItem("items"))
     let addButton = document.getElementById("createFormButton")    
-    console.log(vals)
+    // console.log(localVals)    
+    if (localVals !== null){
 
-    
-    if (vals !== null){
-        if (vals.length === 1){
-            input.value = vals[0].data
-            document.getElementById('order').value = vals[0].val
+        if (localVals.length === 1){
+            input.value = localVals[0].data
+            document.getElementById('order').value = localVals[0].orderNum
+            document.getElementById('boxx').value = localVals[0].data.replace(/(?!\s+$)\s+/g, ",")
+            // console.log(localVals[0].data.split('\n'))
+            if (localVals[0].data !== '') document.getElementById('count1').innerHTML = localVals[0].data.split('\n').length
         }
-        else{
-            // for(let i = 0; i < vals.length; i++){
-            //     if (i === 0){
-            //         input.value = vals[i].data
-            //         document.getElementById('order').vale = vals.name
-            //     }
-            //     else{
-            //     addButton.click()
-                
-            //     let name = "order" + i
-            //     let name2 = "box" + i
-            //     let temp = document.getElementById(name)
-            //     let temp2 = document.getElementById(name2)
-            //     console.log(vals[i].name)
-            //     console.log(vals[i].data)
-            //     temp.value = vals[i].name
-            //     temp2.value = vals[i].data
-            //     }
-            // }
-
-            vals.map((b,i) => {
-                console.log(b)
+        else{            
+            localVals.map((a,i) => {
+                console.log(a)
                 if (i === 0){
-                    input.value = b.data
-                    document.getElementById('order').value = b.val
+                    input.value = a.data
+                    document.getElementById('order').value = a.orderNum
+                    document.getElementById('boxx').value = a.data.replace(/(?!\s+$)\s+/g, ",")
+                    // console.log(a.data.split('\n').length)
+                    if (a.data !== '') document.getElementById('count1').innerHTML = a.data.split('\n').length                    
                 }
                 else{
                 addButton.click()
                 
                 let name = "order" + i
                 let name2 = "box" + i
-                let temp = document.getElementById(name)
-                let temp2 = document.getElementById(name2)
-                console.log(b.val)
-                console.log(b.data)
-                temp.value = b.val
-                temp2.value = b.data
-                }
+                let name3 = "boxx" + i
+                let name4 = "count" + (i + 1)
+                document.getElementById(name).value = a.orderNum
+                document.getElementById(name2).value = a.data
+                document.getElementById(name3).value = a.data.replace(/(?!\s+$)\s+/g, ",")         
+                if (a.data !== '') document.getElementById(name4).innerHTML = a.data.split('\n').length                                                    
+                // console.log(a.data.split('\n').length)      
+                }          
             })
         }
-
-
-
-        // input.value = vals.box
-        // addButton.click()
-        // let temp2 = document.getElementById("box1")
-        // temp2.value = vals.box
+        
     }
 
     const log = document.getElementById("boxx")
@@ -597,7 +579,9 @@ function createForm(){
     val5.append(node)
     val.append(val5)
     val5 = document.createElement("p")
-    val5.id = "count" + count
+    //val5.id = "count" Old method
+    val5.id = "count" + (count + 1)
+    
     val.append(val5)
 
     val_og.append(val)
@@ -630,12 +614,10 @@ window.addEventListener("beforeunload", (event) => {
     for(let i = 0; i < textBox.length; i++){
         if (textBox[i] === 'boxxx' || textBox[i] === 'boxxxx') null
         else{
-            let temp = document.getElementById(textBox[i])
-            // let a = Number(textBox[i].match(/\d+/)[0]) === null ? 'notfound' : Number(textBox[i].match(/\d+/)[0])
-            // let temp2 = document.getElementById(`order${a}`).value === null ? "box" : document.getElementById(`order${a}`).value             
+            let temp = document.getElementById(textBox[i])                         
             let val = document.getElementById(orderBox[i])
             
-            arr.push({ name:  "name", data: temp.value, val: val.value})            
+            arr.push({ data: temp.value, orderNum: val.value })            
         }
         num++
     }
