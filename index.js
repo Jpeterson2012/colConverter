@@ -111,11 +111,11 @@ function hideRemoval(){
     var buttonsrc = document.getElementById("removebutton")
     console.log(buttonsrc.src)
     if (text.hidden === false){
-    buttonsrc.src = './button/show.png'
+    buttonsrc.src = 'show.png'
     text.hidden = true
     }
     else{
-        buttonsrc.src = './button/hide.png'
+        buttonsrc.src = 'hide.png'
         text.hidden = false
     }
 }
