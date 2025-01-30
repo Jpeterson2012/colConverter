@@ -202,8 +202,13 @@ function DBZ(param, url){
     document.body.style.backgroundRepeat = "no-repeat"
     document.body.style.backgroundPosition = "center center"
     // document.body.style.width = "100%"
-    Array.from(document.getElementsByClassName('newButtonCont'))
-    .map(b => {b.style.opacity = '0.7'})
+    let newPic = document.getElementById('newButtonCont2')
+    newPic.style.opacity = '0.7';
+    newPic.onmouseover = function(){newPic.style.opacity = '1'}, newPic.onmouseout = function(){newPic.style.opacity = '0.7'}
+    newPic.style.maxWidth = 'fit-content'
+    
+    Array.from(document.getElementsByClassName('newButtonCont')) 
+    .map(b => {b.style.opacity = '0.7',b.onmouseover = function(){b.style.opacity = '1'}, b.onmouseout = function(){b.style.opacity = '0.7'}})
     // Array.from(document.getElementsByClassName("textButton"))
     // .map(b => {b.style.opacity = '0.5'})
 
@@ -542,7 +547,8 @@ function createForm(){
     // val2.append(val3)
     let val7 = document.createElement("div")
     val7.classList.add('newButtonCont')
-    vegeta ? val7.style.opacity = '0.7' : '1'
+    // vegeta ? val7.style.opacity = '0.7' : '1'
+    vegeta && (val7.style.opacity = '0.7', val7.onmouseover = function(){val7.style.opacity = '1'}, val7.onmouseout = function(){val7.style.opacity = '0.7'})
     val7.style.display = "flex"
     val7.style.background = "white"
     val7.style.width = "296px"
