@@ -1,13 +1,5 @@
-let buttonb = null
-let buttont = null
-let boxb = null
-let boxt = null
-let popupb = null
-let popupt = null
-let linecount = null
-let inputb = null
-let inputt = null
-let ordert = null
+
+let buttonb = null;let buttont = null;let boxb = null;let boxt = null;let popupb = null;let popupt = null;let linecount = null;let inputb = null;let inputt = null;let ordert = null
 
 function duplicate(a){
     const alreadySeen = {}
@@ -719,8 +711,8 @@ window.addEventListener("beforeunload", (event) => {
     localStorage.setItem("items", JSON.stringify(arr))
     localStorage.setItem("huh","huh")
 
-    let alert = driver.switchTo().alert()
-    alert.accept()
-    event.preventDefault()
-    event.returnValue = ''
+    return undefined
+    // driver.switchTo().alert().accept()    
+    // event.preventDefault()
+    // event.returnValue = undefined
 })
