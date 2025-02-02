@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV Converter</title>
     <link rel="icon" type="image" href="redleaf.png" />
-    <link rel="stylesheet" href="index.css"/>
-    <link rel="stylesheet" href="Coloris-0.24.0/dist/coloris.min.css"/>
-    <script src="Coloris-0.24.0/dist/coloris.min.js"></script>
+    <link rel="stylesheet" href="index.css"/>        
     <script src="index.js"></script>
 </head>
 <body>
@@ -21,83 +19,46 @@
         <img src="yellowleaf.png">
         <img src="greenleaf.png">
     </div>
+    <div id="ravens" class="leaves" style="display: none;">
+        <img src="ravens.jpg" style="width: 40px;">
+        <img src="ravens2.png" style="width: 40px;">
+        <img src="ravens.jpg" style="width: 40px;">
+        <img src="ravens2.png" style="width: 40px;">
+        <img src="ravens.jpg" style="width: 40px;">
+        <img src="ravens2.png" style="width: 40px;">
+        <img src="ravens.jpg" style="width: 40px;">
+        <img src="ravens2.png" style="width: 40px;">
+    </div>
+    <div id="christmas" class="leaves" style="display: none;">
+        <img src="candy-canes.png" style="width: 40px;">
+        <img src="gift-box.png" style="width: 40px;">
+        <img src="candy-canes.png" style="width: 40px;">
+        <img src="gift-box.png" style="width: 40px;">
+        <img src="candy-canes.png" style="width: 40px;">
+        <img src="gift-box.png" style="width: 40px;">
+        <img src="candy-canes.png" style="width: 40px;">
+        <img src="gift-box.png" style="width: 40px;">
+    </div>
+
     <div class="dropdown" id="dropdown">
     <button class="dropbtn">Theme</button>
     <div class="dropdown-content">
         <button class="theme" onclick="changeCol('white','black')">Light</button>
         <Button class="theme" onclick="changeCol('black','white')">Dark</Button>
-        <button class="theme" onclick="changeCol('black','red')">Original</button>
-        <button class="theme" onclick="openForm()">Custom</button>
-        <button class="theme" onclick="DBZ(true)">Jay</a>
-        <button class="theme" onclick="DBZ(false, 'fw.png')">fw</a>
-        <button class="theme" onclick="DBZ(false, 'japan.gif')">japan</a>
-        <button class="theme" onclick="DBZ(false, 'autumn.gif')">fall</a>
-        <button class="theme" onclick="DBZ(false, 'vaporwave.gif')">vw</a>
-        <button class="theme" onclick="DBZ(false, 'dusk.gif')">dusk</a>
-        <button class="theme" onclick="DBZ(false, 'coffee.gif')">winter1</a>
-        <button class="theme" onclick="DBZ(false, 'winter.webp')">winter2</a> 
+        <button class="theme" onclick="changeCol('black','red')">Original</button>        
+        <button id="theme1" class="theme" onclick="DBZ('vegeta.jpg', 'theme1')">Jay</a>
+        <button id="theme2" class="theme" onclick="DBZ('fw.png','theme2')">fw</a>
+        <button id="theme3" class="theme" onclick="DBZ('japan.gif', 'theme3')">japan</a>
+        <button id="theme4" class="theme" onclick="DBZ('autumn.gif', 'theme4')">fall</a>
+        <button id="theme5" class="theme" onclick="DBZ('vaporwave.gif', 'theme5')">vw</a>
+        <button id="theme6" class="theme" onclick="DBZ('dusk.gif', 'theme6')">dusk</a>
+        <button id="theme7" class="theme" onclick="DBZ('coffee.gif', 'theme7')">winter1</a>
+        <button id="theme8" class="theme" onclick="DBZ('winter.webp', 'theme8')">winter2</a> 
     </div>
 </div>
-    
-    <div class="form-popup" id="myForm">
-        <form class="form-container">
-            <div class="sub-container" style="display: flex;">
-
-                <div class="col1">
-                    <div>
-                        <label for="buttoncol" style="color: black;"><b>Button Background</b></label><br>
-                        <input type="text" id="buttoncol" name="buttoncol" data-coloris><br>
-                        <label for="buttoncoll" style="color: black;"><b>Button Text</b></label><br>
-                        <input type="text" id="buttoncoll" name="buttoncoll" data-coloris><br>
-                    </div>
-                    <div>
-                        <label for="box1col" style="color: black;"><b>Box Background</b></label><br>
-                        <input type="text" id="box1col" name="box1col" data-coloris><br>
-                        <label for="box11col" style="color: black;"><b>Box Text</b></label><br>
-                        <input type="text" id="box11col" name="box11col" data-coloris><br>
-                    </div>
-                    <div>
-                        <label for="popupcol" style="color: black;"><b>Popup Background</b></label><br>
-                        <input type="text" id="popupcol" name="popupcol" data-coloris><br>
-                        <label for="popupcoll" style="color: black;"><b>Popup Text</b></label><br>
-                        <input type="text" id="popupcoll" name="popupcoll" data-coloris><br>
-                    </div>
-                </div>
-    
-                <div class="col2">
-                    <div>
-                        <label for="pgraphcol" style="color: black;"><b>Line Count</b></label><br>
-                        <input type="text" id="pgraphcol" name="pgraphcol" data-coloris><br>
-                    </div>
-                    <div>
-                        <label for="inputcol" style="color: black;"><b>Input Background</b></label><br>
-                        <input type="text" id="inputcol" name="inputcol" data-coloris><br>
-                        <label for="inputcoll" style="color: black;"><b>Input Text</b></label><br>
-                        <input type="text" id="inputcoll" name="inputcoll" data-coloris><br>
-                    </div>
-                    <div>
-                        <label for="labelcol" style="color: black;"><b>Order# Text</b></label><br>
-                        <input type="text" id="labelcol" name="labelcol" data-coloris><br>
-                    </div>
-                    <div>
-                        <label for="bgroundcol" style="color: black;"><b>Background</b></label><br>
-                        <input type="text" id="bgroundcol" name="bgroundcol" data-coloris><br>
-                    </div>
-                </div>
-
-            </div>
-            
-            
         
-            
-            
-            <button type="button" class="btn" onclick="custom()" style="width: 100%; background-color: lightgray; color: black">Submit</button><br>
-            <button type="button" class="btn cancel" onclick="closeForm()" style="width: 100%; background-color: lightgray; color: black">Cancel</button>
-        </form>
-        
-    </div>
-    <iframe hidden src="https://giphy.com/embed/jbN8TR74FTLb2" width="240" height="175" style="border-radius: 30px; position: absolute; top: 8px; left: 0" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/its-the-great-pumpkin-charlie-brown-linus-van-pelt-charles-m-schulz-jbN8TR74FTLb2"></a></p>
-    <iframe hidden src="https://giphy.com/embed/fsnzYr1pgvAQM" width="240" height="175" style="border-radius: 30px; position: absolute; top: 0; right: 0" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/peanuts-halloween-charlie-brown-great-pumpkin-fsnzYr1pgvAQM"></a></p>
+    <iframe src="https://giphy.com/embed/jbN8TR74FTLb2" width="240" height="175" style="display: none; border-radius: 30px; position: absolute; top: 8px; left: 0" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/its-the-great-pumpkin-charlie-brown-linus-van-pelt-charles-m-schulz-jbN8TR74FTLb2"></a></p>
+    <iframe src="https://giphy.com/embed/fsnzYr1pgvAQM" width="240" height="175" style="display: none; border-radius: 30px; position: absolute; top: 0; right: 0" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/peanuts-halloween-charlie-brown-great-pumpkin-fsnzYr1pgvAQM"></a></p>
     <div style="display: flex; justify-content: center; align-items: center;">
         
         <a style="margin-right: 10px;" href="https://ims.fello.com" target="_blank" rel="noopener noreferrer"><img class="fello" src="Fello.png"></a>
@@ -114,13 +75,12 @@
     <a href="https://ims.fello.com/reports" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; justify-content: center;"><h4 style="background-color: white; color: black; width: 150px; margin-left: 15px; border-radius: 16px; text-align: center;">Reports</h4></a>
     </div>
     
-    
-    
-
+  
     <!-- <h1 style="color: #7f7f7f; font-size: 32px; margin-top: 10px; text-align: center;">Convert Column to Comma Separated List</h1> -->
     <!-- <p id="grandtotal">Total: <p id="subtotal"></p></p> -->
 
-    <img id="main" src="anakin.jpg" style="height: 300px; display: block; margin-left: auto; margin-right: auto; width: 30%; border-radius: 16px; margin-bottom: 20px;">
+    <!-- Main image -->
+    <!-- <img id="main" src="anakin.jpg" style="height: 300px; display: block; margin-left: auto; margin-right: auto; width: 30%; border-radius: 16px; margin-bottom: 20px;"> -->
     <div id="snackbar">Copied to clipboard</div>
     <!-- Duplicate feature -->
     <div id="snackbar2">
@@ -149,7 +109,7 @@
     
     <div id="magic" style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
         
-        <div class="node0" style="margin-top: 25px;">
+        <div class="node0" style="margin-top: 25px; animation: fadeIn 1.5s;">
             <div class="info">
                 <label for="order"><b>Order# </b></label><br>
                 <input type="text" name="order" id="order" placeholder="SQ1234"><br>
@@ -194,51 +154,15 @@
             
         </div>
 
-        <!-- <div>
-
-            <div class="info">
-                <label for="order1"><b>Order Number: </b></label><br>
-                <input type="text" name="order1" id="order1" placeholder="SQ1234"><br>
-                <button onclick="edit(order1)">Edit</button>
-                <button onclick="checkout(order1)">Checkout</button>
-                <button onclick="copyCSV(boxx2)">CopyCSV</button>
-            </div>
-            <textarea id="box2" cols="20" rows="30"  placeholder="Enter (or paste) your column of data here"></textarea>
-            <textarea id="boxx2" cols="20" rows="30"  placeholder="Your comma separated list of data will appear here"></textarea>
-            <div id="line">
-                <p>Line Count: </p>
-                <p id="count2"></p>
-            </div>
-
-        </div>
-
-        <div>
-
-            <div class="info">
-                <label for="order2"><b>Order Number: </b></label><br>
-                <input type="text" name="order2" id="order2" placeholder="SQ1234"><br>
-                <button onclick="edit(order2)">Edit</button>
-                <button onclick="checkout(order2)">Checkout</button>
-                <button onclick="copyCSV(boxx3)">CopyCSV</button>
-            </div>
-            <textarea id="box3" cols="20" rows="30" placeholder="Enter (or paste) your column of data here"></textarea>
-            <textarea id="boxx3" cols="20" rows="30"  placeholder="Your comma separated list of data will appear here"></textarea>
-            <div id="line">
-                <p>Line Count: </p>
-                <p id="count3"></p>
-            </div>
-
-        </div> -->
-        
     </div>
     
     <!-- <label for="profile"><b>Profile Pic: </b></label><br> -->
-     <div style="display: flex;">
+     <!-- <div style="display: flex;">
         <input type="text" name="profile" id="profile" style="display: none; width: 500px;"><br>
         <button id="showbutton" onclick="show()">Show</button>
         <button id="swap"onclick="imageSwap()">Image Swap</button>
         <button id="remove"onclick="remove()">Remove</button>
-     </div>
+     </div> -->
     
 </body>
 </html>

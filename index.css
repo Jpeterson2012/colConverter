@@ -1,4 +1,5 @@
 body{
+    display: none;          
     background: linear-gradient(95deg, #972c2c, black);
     font-family: sans-serif;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
@@ -41,7 +42,7 @@ body{
     animation: leaf 7s linear infinite;
 }
 .leaves{
-    width: 100%;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -255,6 +256,9 @@ button{
   .dropdown {
     position: relative;
     display: inline-block;
+    left: 46.5%;
+    right: 50%;
+    margin-bottom: 20px;
   }
   
   /* Dropdown Content (Hidden by Default) */
@@ -320,4 +324,9 @@ button{
   background: white;
   cursor: pointer;
   border-radius: 16px;
+}
+@media(min-height: 1000px){
+  .dropdown{
+    left: 48%;
+  }
 }

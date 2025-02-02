@@ -21,13 +21,23 @@ function duplicate(a){
     )
     if (setArray.join('\n') == "") x.className = x.className.replace("show", "");
 }
-
-window.addEventListener("DOMContentLoaded", (event) => {
+function loadSaved(){
     //Localstorage retrieval in case page closed by accident
     const input = document.getElementById("box")
-    let localVals = JSON.parse(localStorage.getItem("items"))
-    let addButton = document.getElementById("createFormButton")    
-    // console.log(localVals)    
+    let localVals = JSON.parse(localStorage.getItem("items"))    
+    //Set theme on page open if exists
+    let theme = localStorage.getItem('theme')    
+    if (theme !== undefined && theme !== null){
+        let themeButton = document.getElementById(theme)
+        themeButton.click()
+        document.body.style.display = 'inline'        
+
+    }
+    else{
+        document.body.style.display = 'inline'        
+    }
+
+    let addButton = document.getElementById("createFormButton")        
     if (localVals !== null){
 
         if (localVals.length === 1){
@@ -64,9 +74,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
         
     }
+}
+
+window.addEventListener("DOMContentLoaded", (event) => {    
+    loadSaved()
 
     const log = document.getElementById("boxx")
-    const count = document.getElementById("count1")    
+    const count = document.getElementById("count1")
+    const input = document.getElementById("box")    
     if (input) {
         input.addEventListener("input", updateValue)
         function updateValue(e){
@@ -92,10 +107,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
             count2.innerHTML = arr2.length
             setTimeout(()=>{
                 duplicate(arr2)
-            },500)
-            
+            },500)            
         }
-    }
+    }    
+    //Clear out data on page load after use
+    localStorage.removeItem('items')
+    
 })
 
 function hideRemoval(){
@@ -113,31 +130,29 @@ function hideRemoval(){
 }
 
 var vegeta = false
-function DBZ(param, url){
-    closeForm()
-    //Remove bottom buttons
-    remove()
+function DBZ(url, theme){
+    localStorage.setItem('theme', theme)
     vegeta = true
+    // closeForm()
+    //Remove bottom buttons
+    // remove()    
     //Remove main image
-    var temp2 = document.getElementById("main")
-    temp2.remove()
+    // var temp2 = document.getElementById("main")
+    // temp2.remove()
     //Remove theme dropdown
-    temp2 = document.getElementById("dropdown")
-    temp2.remove()
+    // temp2 = document.getElementById("dropdown")
+    // temp2.remove()
     let temp3 = document.querySelector(".node0 .info #order")
     temp3.style.color = 'white';
-
     //Popup
-    temp2 = document.getElementById("snackbar")
+    let temp2 = document.getElementById("snackbar")
     temp2.style.backgroundColor = 'black'
     temp2.style.color = 'white'
+
     temp2 = document.getElementById("snackbar2")
     temp2.style.backgroundColor = 'black'
     temp2.style.color = 'white'
-    // temp2.style.opacity = '0.5'
-    // temp2.onmouseover = (() => temp2.style.opacity = '1')
-    // temp2.onmouseout = (() => temp2.style.opacity = '0.5')
-
+    
     temp2 = document.getElementById("added")
     temp2.style.backgroundColor = 'black'
     temp2.style.color = 'white'
@@ -145,50 +160,47 @@ function DBZ(param, url){
     temp2.style.backgroundColor = 'black'
     temp2.style.color = 'white'
 
-
-
-    //Change background theme
-    // document.body.style.backgroundImage = "url('vegeta.jpg')"
-    if (param){
+    //Change background theme    
+    if (url == 'vegeta.jpg'){
         document.body.style.backgroundImage = "url('vegeta.jpg')"
         document.body.style.backgroundSize = "contain"
         let temp = document.getElementById("leaves")
-        let temp2 = temp.getElementsByTagName("img")
-        console.log(temp2)
-        for (let i = 0; i < temp2.length; i++){
-            temp2[i].style.width = '40px'
-            if (i % 2 == 0) temp2[i].src = "ravens2.png"
-            else temp2[i].src = "ravens.jpg"
-        }
+        temp.style.display = 'none'
+        temp = document.getElementById("christmas")
+        temp.style.display = 'none'
+        
+        temp = document.getElementById("ravens")
+        temp.style.display = ''
+    }
+    else if (url == 'coffee.gif' || url == 'winter.webp'){
+        let temp = document.getElementById("leaves")
+        temp.style.display = 'none'
+        temp = document.getElementById("ravens")
+        temp.style.display = 'none'
+        temp = document.getElementById("christmas")
+        temp.style.display = ''
+        
+    }
+    else{    
+        let temp = document.getElementById("leaves")
+        temp.style.display = ''
+        temp = document.getElementById("ravens")
+        temp.style.display = 'none'
+        temp = document.getElementById("christmas")
+        temp.style.display = 'none'
+    }
+
+    document.body.style.backgroundImage = `url(${url})`
+    document.body.style.backgroundSize = "cover"
+    if (url == 'autumn.gif'){
+        Array.from(document.getElementsByTagName("iframe"))
+            .map(i => i.style.display = '' )
     }
     else{
-        document.body.style.backgroundImage = `url(${url})`
-        document.body.style.backgroundSize = "cover"
-        if (url == 'autumn.gif'){
-            Array.from(document.getElementsByTagName("iframe"))
-                .map(i => i.removeAttribute("hidden") )
-        }
-        if (url == 'coffee.gif') {
-            if (window.outerHeight > 1000) document.body.style.height = "100vh"
-            else document.body.style.height = "100%"
-            window.addEventListener('resize', () => {
-                if (window.outerHeight > 1000) document.body.style.height = "100vh"
-                else document.body.style.height = "100%"
-            })
-        }
-        if (url == 'coffee.gif' || url == 'winter.webp'){
-            let temp = document.getElementById("leaves")
-            let temp2 = temp.getElementsByTagName("img")
-            for (let i = 0; i < temp2.length; i++){
-                temp2[i].style.width = '40px'
-                if (i % 2 == 0) temp2[i].src = "candy-canes.png"
-                else temp2[i].src = "gift-box.png"
-            }
-        }
+        Array.from(document.getElementsByTagName("iframe"))
+            .map(i => i.style.display = 'none' )
+    }                        
         
-
-    }
-    
     document.body.style.backgroundColor = 'black'
     // document.body.style.backgroundSize = "contain"
     document.body.style.backgroundRepeat = "no-repeat"
@@ -207,8 +219,8 @@ function DBZ(param, url){
     Array.from(document.getElementsByTagName("input"))
     .map(b => {b.style.color = 'white', b.style.backgroundColor = 'black'})
 
-    Array.from(document.getElementsByTagName("button"))
-    .map(b => {b.style.color = 'white', b.style.backgroundColor = 'black', b.style.border = '2px solid white'})
+    // Array.from(document.getElementsByTagName("button"))
+    // .map(b => {b.style.color = 'white', b.style.backgroundColor = 'black', b.style.border = '2px solid white'})
     
     Array.from(document.getElementsByTagName("textarea"))
     .map(b => {b.style.background = 'black',b.style.color = 'white',b.style.opacity = '0.5', b.onmouseover = function(){b.style.opacity = '1'}, b.onmouseout = function(){b.style.opacity = '0.5'}})
@@ -301,86 +313,31 @@ function remove(){
     image = document.getElementById("showbutton")
     image.style.display = "none";
 }
+//Push original three textboxes into stack
 var textBox = []
     textBox.push("box")
     textBox.push("boxxx")
     textBox.push("boxxxx")
 var orderBox = []
+//Push original order field with 2 dummy vals to line up w/ above when using localstorage
 orderBox.push("order")
 orderBox.push("orderrr")
 orderBox.push("orderrr")
-function custom(){
-    closeForm()
-    var temp = document.getElementById("buttoncol").value
-    var temp2 = document.getElementById("buttoncoll").value
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    Array.from(document.getElementsByTagName("button"))
-    .map((b,i) => {i < 24 ? null : (temp2 ?  (b.style.color = temp2,buttont = temp2) : null, temp ? (b.style.backgroundColor = temp, buttonb = temp) : null, temp2 ? b.style.border = "2px solid " + temp2 : null)} )
 
-    var temp2 = document.getElementById("bgroundcol").value 
-
-    var temp = document.getElementsByTagName("body")[0]
-    temp2 ? temp.style.background = temp2 : null
-
-    var temp2 = document.getElementById("box1col").value
-    var temp3 = document.getElementById("box11col").value
-
-    for(let i = 0; i < textBox.length; i++){
-        let temp = document.getElementById(textBox[i])
-        temp2 ? temp.style.background = temp2 : null
-        temp3 ? temp.style.color = temp3 : null
-    }
-    temp2 ? boxb = temp2 : null
-    temp3 ? boxt = temp3 : null
-
-    var temp2 = document.getElementById("popupcol").value
-    var temp3 = document.getElementById("popupcoll").value
-
-    var temp = document.getElementById("snackbar")
-    temp2 ? (temp.style.backgroundColor = temp2, popupb = temp2) : null
-    temp3 ? (temp.style.color = temp3, popupt = temp3) : null
-    var temp = document.getElementById("snackbar2")
-    temp2 ? (temp.style.backgroundColor = temp2, popupb = temp2) : null
-    temp3 ? (temp.style.color = temp3, popupt = temp3) : null
-    var temp = document.getElementById("added")
-    temp2 ? (temp.style.backgroundColor = temp2, popupb = temp2) : null
-    temp3 ? (temp.style.color = temp3, popupt = temp3) : null
-    var temp = document.getElementById("removed")
-    temp2 ? (temp.style.backgroundColor = temp2, popupb = temp2) : null
-    temp3 ? (temp.style.color = temp3, popupt = temp3) : null
-
-    var temp2 = document.getElementById("pgraphcol").value
-    Array.from(document.getElementsByTagName("p"))
-    .map(b => temp2 ? (b.style.color = temp2, linecount = temp2) : null )
-
-    var temp2 = document.getElementById("inputcol").value
-    var temp3 = document.getElementById("inputcoll").value
-
-    Array.from(document.getElementsByTagName("input"))
-    .map((b,i) => {i < 11 ? null : (temp3 ? (b.style.color = temp3, inputt = temp3) : null, temp2 ? (b.style.backgroundColor = temp2, inputb = temp2) : null)} )
-
-    var temp2 = document.getElementById("labelcol").value
-
-    Array.from(document.getElementsByTagName("label"))
-    .map((b,i) => i < 11 ? null : (temp2 ? (b.style.color = temp2, ordert = temp2) : null) )
-}
-function openForm() {
-    
-    document.getElementById("myForm").style.display = "block";
-    document.getElementById("myForm").style.marginLeft = "50%";
-  }
-  
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
-}
 
 function changeCol(col1,col2){
-    var image = document.getElementById("profile").value
-    var imageSrc = document.getElementById("main")
-    if(image.length <= 0) 
-        if (col2 === 'black') imageSrc.src = 'yoda.jpg'
-        else if (col2 === 'white') imageSrc.src = 'vader.jpg'
-        else imageSrc.src = 'anakin.jpg'
+    localStorage.removeItem('theme')
+    //Change back to leaves and original color schemes
+    vegeta = false
+    let theme = document.getElementById("leaves")
+    theme.style.display = ''
+    theme = document.getElementById("ravens")
+    theme.style.display = 'none'
+    theme = document.getElementById("christmas")
+    theme.style.display = 'none'
+    //Remove charlie brown gifs from autumn theme
+    Array.from(document.getElementsByTagName("iframe"))
+            .map(i => i.style.display = 'none' )
 
 
     for(let i = 0; i < textBox.length; i++){
@@ -390,7 +347,6 @@ function changeCol(col1,col2){
     }
     boxb = col1
     boxt = col2
-
 
     var temp = document.getElementsByTagName("body")[0]
     if (col2 === 'red') temp.style.background = "linear-gradient(95deg, #972c2c, black)"
@@ -422,20 +378,28 @@ function changeCol(col1,col2){
     popupt = col2
 
     Array.from(document.getElementsByTagName("p"))
-    .map(b => col2 === 'black' ? (b.style.color = col2, linecount = col2) : (b.style.color = 'white', linecount = 'white') )
-
- //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    Array.from(document.getElementsByTagName("button"))
-    .map((b,i) => {i < 24 ? null :  (b.style.color = col2, buttont = col2, b.style.backgroundColor = col1, buttonb = col1, col2 === 'red' ? b.style.border = 'none' : b.style.border = "2px solid " + col2)} )
+    .map(b => col2 === 'black' ? (b.style.color = col2, linecount = col2) : (b.style.color = 'white', linecount = 'white') ) 
 
     Array.from(document.getElementsByTagName("input"))
-    .map((b,i) => {i < 11 ? null :  (b.style.color = col2, inputt = col2, col1 === 'white' ? (b.style.backgroundColor = 'lightgray', inputb = 'lightgray') : (b.style.backgroundColor = col1, inputb = col1))} )
+    .map((b,i) => {(b.style.color = col2, inputt = col2, col1 === 'white' ? (b.style.backgroundColor = 'lightgray', inputb = 'lightgray') : (b.style.backgroundColor = col1, inputb = col1))} )
 
     Array.from(document.getElementsByTagName("label"))
-    .map((b,i) => i < 11 ? null : col2 === 'black' ? (b.style.color = col2, ordert = col2) : (b.style.color = 'white', ordert = 'white') )
+    .map((b,i) => col2 === 'black' ? (b.style.color = col2, ordert = col2) : (b.style.color = 'white', ordert = 'white') )
+
+    Array.from(document.getElementsByTagName("textarea"))
+    .map((b,i) => {b.style.opacity = '1', b.onmouseover = '', b.onmouseout = '', ((i % 2 === 0 && i > 2) || i === 1 || i === 3) ? (b.style.background = col1, b.style.color = col2) : (b.style.background = '#ccffcc',b.style.color = 'black')})
+
+    Array.from(document.getElementsByClassName('newButtonCont')) 
+    .map(b => {b.style.opacity = '1',b.onmouseover = '', b.onmouseout = ''})   
+
+    temp = document.getElementById('newButtonCont2') 
+    temp.style.opacity = '1'
+    temp.onmouseover = ''
+    temp.onmouseout = ''
 }
+
 var count = 1
-function createForm(){
+function createForm(){    
     copyCSV('added')
     let insidecount = count
     //Creation of div inside of main div "magic"
@@ -456,7 +420,9 @@ function createForm(){
     exit.addEventListener('click', function(){
         val_og.remove()
         let x = textBox.indexOf('box' + insidecount)
+        //Removes orderbox in same place as text box to ensure local storage functions properly
         textBox.splice(x, 1)
+        orderBox.splice(x,1)            
         copyCSV('removed')
     })
     val_og.append(exit)
@@ -484,59 +450,7 @@ function createForm(){
     val2.append(inputval);
     vegeta ? inputval.style.color = 'white' : inputt ? inputval.style.color = inputt : null
     inputval.style.backgroundColor = inputb ? inputb : null
-
-    // let val6 = document.createElement("button")
-    // // val6.addEventListener('click', function(){
-    // //     eraseText(val3,val4,inputval)
-    // // })
-    // node = document.createTextNode("Clear")
-    // val6.append(node)
-    // val6.style.width = '60px';
-    // vegeta ? val6.style.color = 'white' : buttont ? (val6.style.color = buttont, val6.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    // val6.style.backgroundColor = buttonb ? buttonb : null
-    // vegeta ? val6.style.border = '2px solid white' : null
-    // val2.append(val6)
-
-    // val3 = document.createElement("button")
-    // val3.addEventListener('click', function(){
-    //     if (inputval.value) window.open('https://ims.fello.com/order/edit/' + inputval.value, '_blank')
-    //     else null
-    // })
-    // node = document.createTextNode("Edit")
-    // val3.append(node)
-    // val3.style.width = '55px';
-    // vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    // val3.style.backgroundColor = buttonb ? buttonb : null
-    // vegeta ? val3.style.border = '2px solid white' : null
-    // val2.append(val3)
-
-    // val3 = document.createElement("button")
-    // val3.addEventListener('click', function(){
-    //     if (inputval.value) window.open('https://ims.fello.com/checking-out/' + inputval.value, '_blank')
-    //     else null
-    // })
-    // node = document.createTextNode("Checkout")
-    // val3.append(node)
-    // vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    // val3.style.backgroundColor = buttonb ? buttonb : null
-    // vegeta ? val3.style.border = '2px solid white' : null
-    // val2.append(val3)
-
-    // val3 = document.createElement("button")
-    // val3.addEventListener('click', function(){
-    //     val4.select();
-    //     val4.setSelectionRange(0, 99999);
-    //     navigator.clipboard.writeText(val4.value);
-    //     var x = document.getElementById("snackbar");
-    //     x.className = "show";
-    //     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-    // })
-    // node = document.createTextNode("CopyCSV")
-    // val3.append(node)
-    // vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    // val3.style.backgroundColor = buttonb ? buttonb : null
-    // vegeta ? val3.style.border = '2px solid white' : null
-    // val2.append(val3)
+   
     let val7 = document.createElement("div")
     val7.classList.add('newButtonCont')
     // vegeta ? val7.style.opacity = '0.7' : '1'
@@ -604,23 +518,6 @@ function createForm(){
 
     val2.append(val7)
 
-    // val3 = document.createElement("button")
-    // val3.addEventListener('click', function(){
-    //     val4.select();
-    //     val4.setSelectionRange(0, 99999);
-    //     navigator.clipboard.writeText(val4.value);
-    //     var x = document.getElementById("snackbar");
-    //     x.className = "show";
-    //     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-    // })
-    // node = document.createTextNode("CopyCSV")
-    // val3.append(node)
-    // vegeta ? val3.style.color = 'white' : buttont ? (val3.style.color = buttont, val3.style.border = (buttont === 'red') ? null : '2px solid ' + buttont) : null
-    // val3.style.backgroundColor = buttonb ? buttonb : null
-    // vegeta ? val3.style.border = '2px solid white' : null
-    // val2.append(val3)
-
-
     //Text areas start here
     val = document.createElement("div")
     val.style.display = "flex"
@@ -628,7 +525,7 @@ function createForm(){
 
     val3 = document.createElement("textarea")
     val3.id  = "box" + count
-    textBox.push(val3.id)
+    textBox.push(val3.id)    
     val3.cols = "20"
     val3.rows = "30"
     val3.placeholder = "Enter (or paste) your column of data here"
@@ -686,17 +583,10 @@ function createForm(){
         eraseText(val3,val4,inputval)
         val5.innerHTML = "";
     })
-    count++
+    count++               
 }
-
-window.addEventListener("beforeunload", (event) => {
-    // localStorage.clear()
-
-    
-    let arr = []
-
-    // let items = {"box": input.value}
-    let num = 1
+window.addEventListener("beforeunload", (event) => {    
+    let arr = []    
     for(let i = 0; i < textBox.length; i++){
         if (textBox[i] === 'boxxx' || textBox[i] === 'boxxxx') null
         else{
@@ -704,15 +594,10 @@ window.addEventListener("beforeunload", (event) => {
             let val = document.getElementById(orderBox[i])
             
             arr.push({ data: temp.value, orderNum: val.value })            
-        }
-        num++
+        }        
     }
-    
-    localStorage.setItem("items", JSON.stringify(arr))
-    localStorage.setItem("huh","huh")
-
-    return undefined
-    // driver.switchTo().alert().accept()    
-    // event.preventDefault()
-    // event.returnValue = undefined
+    localStorage.setItem("items", JSON.stringify(arr))        
+        
+    return ''
 })
+
