@@ -690,7 +690,7 @@ function createForm(){
 }
 
 window.addEventListener("beforeunload", (event) => {
-    localStorage.clear()
+    // localStorage.clear()
 
     
     let arr = []
