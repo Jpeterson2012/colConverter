@@ -286,6 +286,11 @@ function edit(param){
     if (temp) window.open('https://ims.fello.com/order/edit/' + temp, '_blank')
     else null
 }
+function openMdm(param){
+    var temp = document.getElementById(param.id).value
+    if (temp) window.open('https://a.simplemdm.com/admin/v2/devices?group=&order=name&orderD=desc&page=0&per=100&saveQuery=true&search=' + temp, '_blank')
+    else null
+}
 function imageSwap(){
     var imageSrc = document.getElementById("profile").value
     var image = document.getElementById("main")
@@ -510,6 +515,18 @@ function createForm(){
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     })    
     val3.src = 'copy.png'
+    val3.style.width = "45px"
+    val3.style.height = "auto"
+    val3.style.cursor = "pointer"
+    val3.style.borderRadius = "16px"
+    val7.append(val3)
+
+    val3 = document.createElement("img")
+    val3.addEventListener('click', function(){
+        if (inputval.value) window.open('https://a.simplemdm.com/admin/v2/devices?group=&order=name&orderD=desc&page=0&per=100&saveQuery=true&search=' + inputval.value, '_blank')            
+        else null
+    })    
+    val3.src = 'mdm.png'
     val3.style.width = "45px"
     val3.style.height = "auto"
     val3.style.cursor = "pointer"
