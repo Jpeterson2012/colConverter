@@ -80,11 +80,11 @@ function addOrders(){
     const text = document.getElementById("boxxx")
     // let temp = text.value.replaceAll('\n','')
     let temp = text.value.split('\n')
-    console.log(temp[1])
-    console.log(temp.length)
+    // console.log(temp[1])
+    // console.log(temp.length)
     let temp2 = [...orderBox]
     temp2.splice(1,2)    
-    console.log(temp2)
+    // console.log(temp2)
     if (temp2.length >= temp.length){                        
         
         for (let i = 0; i < temp.length; i++){            
