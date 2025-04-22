@@ -82,14 +82,22 @@ function addOrders(){
     let temp = text.value.split('\n')
     // console.log(temp[1])
     // console.log(temp.length)
-    let temp2 = [...orderBox]
-    temp2.splice(1,2)    
+      
     // console.log(temp2)
-    if (temp2.length >= temp.length){                        
-        
+    if (orderBox.length - 2 >= temp.length){                        
+        let temp2 = [...orderBox]
+        temp2.splice(1,2)  
         for (let i = 0; i < temp.length; i++){            
             document.getElementById(temp2[i]).value = temp[i]
         }
+    }
+    else{
+        let temp3 = temp.length - (orderBox.length - 2)
+        let addButton = document.getElementById("createFormButton")
+        for (let i = 0; i < temp3; i++) addButton.click()        
+        temp3 = [...orderBox]
+        temp3.splice(1,2)
+        for (let i = 0; i < temp.length; i++)  document.getElementById(temp3[i]).value = temp[i]        
     }
 }
 
