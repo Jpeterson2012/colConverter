@@ -79,12 +79,12 @@ function loadSaved(){
 function addOrders(){
     const text = document.getElementById("boxxx")
     // let temp = text.value.replaceAll('\n','')
-    let temp = text.value.split('\n')
-    // console.log(temp[1])
-    // console.log(temp.length)
+    let temp = text.value.split('\n').filter(a => a!== '')
+   
       
     // console.log(temp2)
-    if (orderBox.length - 2 >= temp.length){                        
+    if(temp.length > 0){
+    if (orderBox.length - 2 >= temp.length){                  
         let temp2 = [...orderBox]
         temp2.splice(1,2)  
         for (let i = 0; i < temp.length; i++){            
@@ -99,6 +99,7 @@ function addOrders(){
         temp3.splice(1,2)
         for (let i = 0; i < temp.length; i++)  document.getElementById(temp3[i]).value = temp[i]        
     }
+}
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {    
