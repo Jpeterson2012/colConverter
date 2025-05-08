@@ -257,7 +257,7 @@ button{
   .dropdown {
     position: relative;
     display: inline-block;
-    left: 46.5%;
+    left: 50%;
     right: 50%;
     margin-bottom: 20px;
   }
@@ -268,8 +268,8 @@ button{
     position: absolute;
     padding: 10px;
     background-color: black;
-    min-width: 225px;
-    min-height: 290px;;
+    min-width: 505px;
+    min-height: fit-content;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 16px;
     z-index: 1;
@@ -327,7 +327,45 @@ button{
   background: white;
   cursor: pointer;
   border-radius: 16px;
+  transition-duration: 0.3s;
 }
+.textButton:hover{  
+  transform: scale(1.1);
+  box-shadow: 0px 2px 10px 5px #000000;
+}
+.textButton:active{
+  animation: wiggle 4s linear
+}
+.hovered{
+  transform: scale(2);
+}
+
+/* Keyframes */
+@keyframes wiggle {
+  0%, 7% {
+    transform: rotateZ(0);
+  }
+  15% {
+    transform: rotateZ(-15deg);
+  }
+  20% {
+    transform: rotateZ(10deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  30% {
+    transform: rotateZ(6deg);
+  }
+  35% {
+    transform: rotateZ(-4deg);
+  }
+  40%, 100% {
+    transform: rotateZ(0);
+  }
+}
+
+
 @media(min-height: 1000px){
   .dropdown{
     left: 48%;

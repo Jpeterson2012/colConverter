@@ -61,6 +61,11 @@
         <button id="theme13" class="theme" onclick="DBZ('forest.jpg', 'theme13')">forest</a>
         <button id="theme14" class="theme" onclick="DBZ('halo3.jpg', 'theme14')">halo3</a>
         <button id="theme15" class="theme" onclick="DBZ('celeste.avif', 'theme15')">celeste</a>   
+        <button id="theme16" class="theme" onclick="DBZ('vwsunset.gif', 'theme16')">sunset</a>   
+        <button id="theme17" class="theme" onclick="DBZ('vwsunset2.jpg', 'theme17')">sunset2</a>
+        <button id="theme18" class="theme" onclick="DBZ('spring.jpg', 'theme18')">spring</a>   
+        <button id="theme19" class="theme" onclick="DBZ('spring2.jpg', 'theme19')">spring2</a>
+        <button id="theme20" class="theme" onclick="DBZ('bridge.jpg', 'theme20')">bridge</a>      
     </div>
 </div>
         
@@ -126,10 +131,10 @@
                 <button  onclick="checkout(order)">Checkout</button>
                 <button onclick="copyCSV(boxx)">CopyCSV</button> -->
                 <div class="newButtonCont" style="display: flex;background: white; width: 296px; justify-content: space-between; border-radius: 16px;">
-                    <img src="clear.png" class="textButton" onclick="eraseText(box,boxx,order)">
-                    <img src="edit.png" class="textButton" onclick="edit(order)">
-                    <img src="checkout.png" class="textButton" onclick="checkout(order)">
-                    <img src="copy.png" class="textButton" onclick="copyCSV(boxx)">
+                    <img id="textButton" src="clear.png" class="textButton" onclick="eraseText(box,boxx,order)">
+                    <img id="textButton" src="edit.png" class="textButton" onclick="edit(order)">
+                    <img id="textButton" src="checkout.png" class="textButton" onclick="checkout(order,textButton)">
+                    <img id="textButton" src="copy.png" class="textButton" onclick="copyCSV(boxx)">
                     <img class="textButton" src="mdm.png" style="border-radius: 16px;" onclick="openMdm(order)">
                 </div>                
             </div>

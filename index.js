@@ -448,6 +448,8 @@ function createForm(){
     exit.style.marginBottom = '10px';
     exit.style.background = 'white';
     exit.style.borderRadius = '16px';
+    exit.onmouseover = function(){exit.classList.add('hovered')}
+    exit.onmouseout = function(){exit.classList.remove('hovered')}
     exit.addEventListener('click', function(){
         val_og.remove()
         let x = textBox.indexOf('box' + insidecount)
@@ -498,10 +500,11 @@ function createForm(){
     })
     // val6.classList.add("textButton")
     val6.src = 'clear.png'
-    val6.style.width = "45px"
-    val6.style.height = "auto"
-    val6.style.cursor = "pointer"
-    val6.style.borderRadius = "16px"
+    // val6.style.width = "45px"
+    // val6.style.height = "auto"
+    // val6.style.cursor = "pointer"
+    // val6.style.borderRadius = "16px"
+    val6.classList.add('textButton')
     val7.append(val6)
     
     //Edit Image
@@ -511,10 +514,11 @@ function createForm(){
         else null
     })    
     val3.src = 'edit.png'
-    val3.style.width = "45px"
-    val3.style.height = "auto"
-    val3.style.cursor = "pointer"
-    val3.style.borderRadius = "16px"
+    // val3.style.width = "45px"
+    // val3.style.height = "auto"
+    // val3.style.cursor = "pointer"
+    // val3.style.borderRadius = "16px"
+    val3.classList.add('textButton')
     val7.append(val3)
     
     //Checkout Image
@@ -524,10 +528,11 @@ function createForm(){
         else null
     })    
     val3.src = 'checkout.png'
-    val3.style.width = "45px"
-    val3.style.height = "auto"
-    val3.style.cursor = "pointer"
-    val3.style.borderRadius = "16px"
+    // val3.style.width = "45px"
+    // val3.style.height = "auto"
+    // val3.style.cursor = "pointer"
+    // val3.style.borderRadius = "16px"
+    val3.classList.add('textButton')
     val7.append(val3)
 
     //Copy CSV Img
@@ -541,10 +546,11 @@ function createForm(){
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     })    
     val3.src = 'copy.png'
-    val3.style.width = "45px"
-    val3.style.height = "auto"
-    val3.style.cursor = "pointer"
-    val3.style.borderRadius = "16px"
+    // val3.style.width = "45px"
+    // val3.style.height = "auto"
+    // val3.style.cursor = "pointer"
+    // val3.style.borderRadius = "16px"
+    val3.classList.add('textButton')
     val7.append(val3)
 
     val3 = document.createElement("img")
@@ -553,10 +559,11 @@ function createForm(){
         else null
     })    
     val3.src = 'mdm.png'
-    val3.style.width = "45px"
-    val3.style.height = "auto"
-    val3.style.cursor = "pointer"
-    val3.style.borderRadius = "16px"
+    // val3.style.width = "45px"
+    // val3.style.height = "auto"
+    // val3.style.cursor = "pointer"
+    // val3.style.borderRadius = "16px"
+    val3.classList.add('textButton')
     val7.append(val3)
 
     val2.append(val7)
