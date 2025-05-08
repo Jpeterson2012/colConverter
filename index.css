@@ -105,6 +105,9 @@ body{
 label{
     text-align: center; 
     color: white;
+    background-color: black;
+    padding: 5px;
+    
 }
 input{
     width: 115px; height: 30px; background-color: black; font-weight: bold; font-size: large; color: red;
@@ -139,6 +142,10 @@ button{
     display: flex; 
     font-size: 20px; 
     color: white;
+}
+#line p{
+  background-color: black;
+  padding: 5px;
 }
 #boxx{
     width: 300px;
