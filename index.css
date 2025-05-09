@@ -110,7 +110,7 @@ label{
     
 }
 input{
-    width: 115px; height: 30px; background-color: black; font-weight: bold; font-size: large; color: red;
+    width: 107px; height: 30px; background-color: black; font-weight: bold; font-size: large; color: red;
 }
 .info{
     display: flex; 
