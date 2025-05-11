@@ -32,10 +32,10 @@ body{
     width: 190px;
     height: 250px;
 }
-#boxx{
-    width: 160px; 
+#boxx{    
     font-size: 20px; 
     background-color: #ccffcc;
+    width: 300px;
 }
 .leaves img{
     width: 50px;
@@ -146,9 +146,6 @@ button{
 #line p{
   background-color: black;
   padding: 5px;
-}
-#boxx{
-    width: 300px;
 }
 #snackbar, #added, #removed{
     visibility: hidden; /* Hidden by default. Visible on click */
@@ -264,9 +261,9 @@ button{
   .dropdown {
     position: relative;
     display: inline-block;
-    left: 47%;
+    left: 46.75%;
     right: 50%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   /* Dropdown Content (Hidden by Default) */
@@ -378,3 +375,4 @@ button{
     left: 48%;
   }
 }
+
