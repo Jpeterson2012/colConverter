@@ -317,23 +317,7 @@ function openMdm(param){
     if (temp) window.open('https://a.simplemdm.com/admin/v2/devices?group=&order=name&orderD=desc&page=0&per=100&saveQuery=true&search=' + temp, '_blank')
     else null
 }
-function imageSwap(){
-    var imageSrc = document.getElementById("profile").value
-    var image = document.getElementById("main")
-    if (imageSrc.length > 0) image.src = imageSrc
-}
-function show(){
-    var imageSrc = document.getElementById("profile")
-    var buttonsrc = document.getElementById("showbutton")
-    if (buttonsrc.innerHTML === "Show"){
-    buttonsrc.innerHTML="Hide"
-    imageSrc.style.removeProperty("display")
-    }
-    else{
-        buttonsrc.innerHTML="Show"
-        imageSrc.style.display = "none"
-    }
-}
+
 function remove(){
     var image = document.getElementById("main")
     image.style.display = "none";
