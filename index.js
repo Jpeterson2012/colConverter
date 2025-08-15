@@ -58,17 +58,17 @@ function loadSaved(){
                     if (a.data !== '') document.getElementById('count1').innerHTML = a.data.split('\n').length                    
                 }
                 else{
-                addButton.click()
-                
-                let name = "order" + i
-                let name2 = "box" + i
-                let name3 = "boxx" + i
-                let name4 = "count" + (i + 1)
-                document.getElementById(name).value = a.orderNum
-                document.getElementById(name2).value = a.data
-                document.getElementById(name3).value = a.data.replace(/(?!\s+$)\s+/g, ",")         
-                if (a.data !== '') document.getElementById(name4).innerHTML = a.data.split('\n').length                                                    
-                // console.log(a.data.split('\n').length)      
+                    addButton.click()
+                    
+                    let name = "order" + i
+                    let name2 = "box" + i
+                    let name3 = "boxx" + i
+                    let name4 = "count" + (i + 1)
+                    document.getElementById(name).value = a.orderNum
+                    document.getElementById(name2).value = a.data
+                    document.getElementById(name3).value = a.data.replace(/(?!\s+$)\s+/g, ",")         
+                    if (a.data !== '') document.getElementById(name4).innerHTML = a.data.split('\n').length                                                    
+                    // console.log(a.data.split('\n').length)      
                 }          
             })
         }
@@ -79,30 +79,29 @@ function loadSaved(){
 function addOrders(){
     const text = document.getElementById("boxxx")
     // let temp = text.value.replaceAll('\n','')
-    let temp = text.value.split('\n').filter(a => a!== '')
-   
-      
+    let temp = text.value.split('\n').filter(a => a !== '')
+         
     // console.log(temp2)
     if(temp.length > 0){
-    if (orderBox.length - 2 >= temp.length){                  
-        let temp2 = [...orderBox]
-        temp2.splice(1,2)  
-        for (let i = 0; i < temp.length; i++){            
-            document.getElementById(temp2[i]).value = temp[i]
+        if (orderBox.length - 2 >= temp.length){                  
+            let temp2 = [...orderBox]
+            temp2.splice(1,2)  
+            for (let i = 0; i < temp.length; i++){            
+                document.getElementById(temp2[i]).value = temp[i]
+            }
+        }
+        else{
+            let temp3 = temp.length - (orderBox.length - 2)
+            let addButton = document.getElementById("createFormButton")
+            for (let i = 0; i < temp3; i++) addButton.click()        
+            temp3 = [...orderBox]
+            temp3.splice(1,2)
+            for (let i = 0; i < temp.length; i++)  document.getElementById(temp3[i]).value = temp[i]        
         }
     }
-    else{
-        let temp3 = temp.length - (orderBox.length - 2)
-        let addButton = document.getElementById("createFormButton")
-        for (let i = 0; i < temp3; i++) addButton.click()        
-        temp3 = [...orderBox]
-        temp3.splice(1,2)
-        for (let i = 0; i < temp.length; i++)  document.getElementById(temp3[i]).value = temp[i]        
-    }
-}
 }
 
-window.addEventListener("DOMContentLoaded", (event) => {    
+window.addEventListener("DOMContentLoaded", () => {    
     loadSaved()
 
     const log = document.getElementById("boxx")
@@ -115,8 +114,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             temp = temp.toString().replace(/(?!\s+$)\s+/g, ",")
             log.value = temp
             let arr = log.value.split(',')
-            count.innerHTML = arr.length            
-            
+            count.innerHTML = arr.length                        
         }
     }
     const text = document.getElementById("boxxx")
@@ -137,8 +135,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         }
     }    
     //Clear out data on page load after use
-    localStorage.removeItem('items')
-    
+    localStorage.removeItem('items')    
 })
 
 function hideRemoval(){
@@ -268,7 +265,8 @@ function DBZ(url, theme){
     inputt = null
     ordert = null
 }
-function eraseText(param1,param2, param3){
+
+function eraseText(param1, param2, param3){
     if (param1.id == 'boxxx'){
         document.getElementById(param1.id).value = "";
         document.getElementById("count0").innerHTML = "";
@@ -284,6 +282,7 @@ function eraseText(param1,param2, param3){
         }
     }
 }
+
 function copyCSV(param) {
     if (param === 'removed' || param === 'added'){
         var x = document.getElementById(param);
@@ -291,14 +290,14 @@ function copyCSV(param) {
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1500);
     }
     else{
-    var copyText = document.getElementById(param.id);
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(copyText.value);
-    
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        var copyText = document.getElementById(param.id);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+        
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 }
 
@@ -307,38 +306,26 @@ function checkout(param){
     if (temp) window.open('https://ims.fello.com/checking-out/' + temp, '_blank')
     else null
 }
+
 function edit(param){
     var temp = document.getElementById(param.id).value
     if (temp) window.open('https://ims.fello.com/order/edit/' + temp, '_blank')
     else null
 }
+
 function openMdm(param){
     var temp = document.getElementById(param.id).value
     if (temp) window.open('https://a.simplemdm.com/admin/v2/devices?group=&order=name&orderD=desc&page=0&per=100&saveQuery=true&search=' + temp, '_blank')
     else null
 }
 
-function remove(){
-    var image = document.getElementById("main")
-    image.style.display = "none";
-    image = document.getElementById("swap")
-    image.style.display = "none";
-    image = document.getElementById("remove")
-    image.style.display = "none";
-    image = document.getElementById("showbutton")
-    image.style.display = "none";
-}
 //Push original three textboxes into stack
 var textBox = []
-    textBox.push("box")
-    textBox.push("boxxx")
-    textBox.push("boxxxx")
+textBox.push("box", "boxxx", "boxxxx")        
+
 var orderBox = []
 //Push original order field with 2 dummy vals to line up w/ above when using localstorage
-orderBox.push("order")
-orderBox.push("orderrr")
-orderBox.push("orderrr")
-
+orderBox.push("order", "orderrr", "orderrr")
 
 function changeCol(col1,col2){
     localStorage.removeItem('theme')
@@ -352,8 +339,7 @@ function changeCol(col1,col2){
     theme.style.display = 'none'
     //Remove charlie brown gifs from autumn theme
     Array.from(document.getElementsByTagName("iframe"))
-            .map(i => i.style.display = 'none' )
-
+        .map(i => i.style.display = 'none' )
 
     for(let i = 0; i < textBox.length; i++){
         let temp = document.getElementById(textBox[i])
@@ -417,209 +403,195 @@ var count = 1
 function createForm(){    
     copyCSV('added')
     let insidecount = count
-    //Creation of div inside of main div "magic"
-    let val_og = document.createElement("div")
-    val_og.style.animation = 'fadeIn 1.5s'
-    val_og.classList.add("node" + count)
-    const element = document.getElementById("magic")
-    element.append(val_og)
 
-    let exit = document.createElement("img")
-    exit.src = 'close.png'
-    exit.style.width = '22px'
-    exit.style.marginLeft = '50%';
-    exit.style.cursor = 'pointer';
-    exit.style.marginBottom = '10px';
-    exit.style.background = 'white';
-    exit.style.borderRadius = '16px';
-    exit.onmouseover = function(){exit.classList.add('hovered')}
-    exit.onmouseout = function(){exit.classList.remove('hovered')}
-    exit.addEventListener('click', function(){
-        val_og.remove()
+    //Creation of div inside of main div "magic"
+    let containerDiv = document.createElement("div")
+    containerDiv.style.animation = 'fadeIn 1.5s'
+    containerDiv.classList.add("node" + count)
+
+    //Main project container
+    const magic = document.getElementById("magic")
+    magic.append(containerDiv)
+
+    //Creation of close button element
+    let deleteForm = document.createElement("img")
+    deleteForm.src = 'close.png'
+    deleteForm.style.width = '22px'
+    deleteForm.style.marginLeft = '50%';
+    deleteForm.style.cursor = 'pointer';
+    deleteForm.style.marginBottom = '10px';
+    deleteForm.style.background = 'white';
+    deleteForm.style.borderRadius = '16px';
+    deleteForm.onmouseover = function(){deleteForm.classList.add('hovered')}
+    deleteForm.onmouseout = function(){deleteForm.classList.remove('hovered')}
+    deleteForm.addEventListener('click', function(){
+        containerDiv.remove()
         let x = textBox.indexOf('box' + insidecount)
         //Removes orderbox in same place as text box to ensure local storage functions properly
         textBox.splice(x, 1)
-        orderBox.splice(x,1)            
+        orderBox.splice(x, 1)            
         copyCSV('removed')
     })
-    val_og.append(exit)
-    //Info div starts here
-    let val2 = document.createElement("div")
-    val2.classList.add("info")
-    val_og.append(val2)
+    containerDiv.append(deleteForm)
 
-    // val = document.createElement()
-    let val = document.createElement("label")
-    val.htmlFor = "order" + count
-    val2.append(val)
+    //Creation of info div
+    let infoDiv = document.createElement("div")
+    infoDiv.classList.add("info")
+    containerDiv.append(infoDiv)
+
+    //Creation of label element
+    let label = document.createElement("label")
+    label.htmlFor = "order" + count
+    infoDiv.append(label)
     let node = document.createTextNode("Order# ")
-    let val3 = document.createElement("b")
-    val.style.color = ordert ? ordert : 'white'
-    val3.append(node)
-    val.append(val3)
+    //Creation of bold element
+    let boldElement = document.createElement("b")
+    label.style.color = ordert ? ordert : 'white'
+    boldElement.append(node)
+    label.append(boldElement)
 
-    let inputval = document.createElement("input")
-    inputval.type = 'text'
-    inputval.name = 'order' + count
-    inputval.id = 'order' + count
-    orderBox.push(inputval.id)
-    inputval.placeholder = 'SQ1234'
-    val2.append(inputval);
-    vegeta ? inputval.style.color = 'white' : inputt ? inputval.style.color = inputt : null
-    inputval.style.backgroundColor = inputb ? inputb : null
+    //Creation of input element
+    let inputElement = document.createElement("input")
+    inputElement.type = 'text'
+    inputElement.name = 'order' + count
+    inputElement.id = 'order' + count
+    orderBox.push(inputElement.id)
+    inputElement.placeholder = 'SQ1234'
+    infoDiv.append(inputElement);
+    vegeta ? inputElement.style.color = 'white' : inputt ? inputElement.style.color = inputt : null
+    inputElement.style.backgroundColor = inputb ? inputb : null
    
-    let val7 = document.createElement("div")
-    val7.classList.add('newButtonCont')
-    // vegeta ? val7.style.opacity = '0.7' : '1'
-    vegeta && (val7.style.opacity = '0.7', val7.onmouseover = function(){val7.style.opacity = '1'}, val7.onmouseout = function(){val7.style.opacity = '0.7'})
-    val7.style.display = "flex"
-    val7.style.background = "white"
-    val7.style.width = "296px"
-    val7.style.justifyContent = "space-between"
-    val7.style.borderRadius = "16px"
+    let topButtonContainer = document.createElement("div")
+    topButtonContainer.classList.add('newButtonCont')
+    // vegeta ? topButtonContainer.style.opacity = '0.7' : '1'
+    vegeta && (topButtonContainer.style.opacity = '0.7', topButtonContainer.onmouseover = function(){topButtonContainer.style.opacity = '1'}, topButtonContainer.onmouseout = function(){topButtonContainer.style.opacity = '0.7'})
+    topButtonContainer.style.display = "flex"
+    topButtonContainer.style.background = "white"
+    topButtonContainer.style.width = "296px"
+    topButtonContainer.style.justifyContent = "space-between"
+    topButtonContainer.style.borderRadius = "16px"
     //Clear Img
-    let val6 = document.createElement("img")
-    val6.addEventListener('click', function(){
-        eraseText(val3,val4,inputval)
+    let clearButton = document.createElement("img")
+    clearButton.addEventListener('click', function(){
+        eraseText(boldElement,textArea2,inputElement)
     })
-    // val6.classList.add("textButton")
-    val6.src = 'clear.png'
-    // val6.style.width = "45px"
-    // val6.style.height = "auto"
-    // val6.style.cursor = "pointer"
-    // val6.style.borderRadius = "16px"
-    val6.classList.add('textButton')
-    val7.append(val6)
+    
+    clearButton.src = 'clear.png'
+    clearButton.classList.add('textButton')
+    topButtonContainer.append(clearButton)
     
     //Edit Image
-    val3 = document.createElement("img")
-    val3.addEventListener('click', function(){
-        if (inputval.value) window.open('https://ims.fello.com/order/edit/' + inputval.value, '_blank')
+    let imgButton = document.createElement("img")
+    imgButton.addEventListener('click', function(){
+        if (inputElement.value) window.open('https://ims.fello.com/order/edit/' + inputElement.value, '_blank')
         else null
     })    
-    val3.src = 'edit.png'
-    // val3.style.width = "45px"
-    // val3.style.height = "auto"
-    // val3.style.cursor = "pointer"
-    // val3.style.borderRadius = "16px"
-    val3.classList.add('textButton')
-    val7.append(val3)
+    imgButton.src = 'edit.png'
+    imgButton.classList.add('textButton')
+    topButtonContainer.append(imgButton)
     
     //Checkout Image
-    val3 = document.createElement("img")
-    val3.addEventListener('click', function(){
-        if (inputval.value) window.open('https://ims.fello.com/checking-out/' + inputval.value, '_blank')
+    imgButton = document.createElement("img")
+    imgButton.addEventListener('click', function(){
+        if (inputElement.value) window.open('https://ims.fello.com/checking-out/' + inputElement.value, '_blank')
         else null
     })    
-    val3.src = 'checkout.png'
-    // val3.style.width = "45px"
-    // val3.style.height = "auto"
-    // val3.style.cursor = "pointer"
-    // val3.style.borderRadius = "16px"
-    val3.classList.add('textButton')
-    val7.append(val3)
+    imgButton.src = 'checkout.png'
+    imgButton.classList.add('textButton')
+    topButtonContainer.append(imgButton)
 
     //Copy CSV Img
-    val3 = document.createElement("img")
-    val3.addEventListener('click', function(){
-        val4.select();
-        val4.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(val4.value);
+    imgButton = document.createElement("img")
+    imgButton.addEventListener('click', function(){
+        textArea2.select();
+        textArea2.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(textArea2.value);
         var x = document.getElementById("snackbar");
         x.className = "show";
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     })    
-    val3.src = 'copy.png'
-    // val3.style.width = "45px"
-    // val3.style.height = "auto"
-    // val3.style.cursor = "pointer"
-    // val3.style.borderRadius = "16px"
-    val3.classList.add('textButton')
-    val7.append(val3)
+    imgButton.src = 'copy.png'
+    imgButton.classList.add('textButton')
+    topButtonContainer.append(imgButton)
 
-    val3 = document.createElement("img")
-    val3.addEventListener('click', function(){
-        if (inputval.value) window.open('https://a.simplemdm.com/admin/v2/devices?group=&order=name&orderD=desc&page=0&per=100&saveQuery=true&search=' + inputval.value, '_blank')            
+    imgButton = document.createElement("img")
+    imgButton.addEventListener('click', function(){
+        if (inputElement.value) window.open('https://a.simplemdm.com/admin/v2/devices?group=&order=name&orderD=desc&page=0&per=100&saveQuery=true&search=' + inputElement.value, '_blank')            
         else null
     })    
-    val3.src = 'mdm.png'
-    // val3.style.width = "45px"
-    // val3.style.height = "auto"
-    // val3.style.cursor = "pointer"
-    // val3.style.borderRadius = "16px"
-    val3.classList.add('textButton')
-    val7.append(val3)
+    imgButton.src = 'mdm.png'
+    imgButton.classList.add('textButton')
+    topButtonContainer.append(imgButton)
 
-    val2.append(val7)
+    infoDiv.append(topButtonContainer)
 
     //Text areas start here
-    val = document.createElement("div")
-    val.style.display = "flex"
+    let textAreaDiv = document.createElement("div")
+    textAreaDiv.style.display = "flex"
 
-
-    val3 = document.createElement("textarea")
-    val3.id  = "box" + count
-    textBox.push(val3.id)    
-    val3.cols = "20"
-    val3.rows = "30"
-    val3.placeholder = "Enter (or paste) your column of data here"
-    val3.style.width = "160px"
-    val3.style.fontSize = "20px";
-    val3.style.backgroundColor = boxb ? boxb : "black"
-    vegeta ? val3.style.color =  "white" : boxt ? val3.style.color =  boxt : val3.style.color =  "red"
-    vegeta && (val3.style.opacity = 0.5, val3.onmouseover = function(){val3.style.opacity = '1'}, val3.onmouseout = function(){val3.style.opacity = '0.5'})
+    let textArea1 = document.createElement("textarea")
+    textArea1.id  = "box" + count
+    textBox.push(textArea1.id)    
+    textArea1.cols = "20"
+    textArea1.rows = "30"
+    textArea1.placeholder = "Enter (or paste) your column of data here"
+    textArea1.style.width = "160px"
+    textArea1.style.fontSize = "20px";
+    textArea1.style.backgroundColor = boxb ? boxb : "black"
+    vegeta ? textArea1.style.color =  "white" : boxt ? textArea1.style.color =  boxt : textArea1.style.color =  "red"
+    vegeta && (textArea1.style.opacity = 0.5, textArea1.onmouseover = function(){textArea1.style.opacity = '1'}, textArea1.onmouseout = function(){textArea1.style.opacity = '0.5'})    
     
-    
-    val.append(val3)
+    textAreaDiv.append(textArea1)
 
-    let val4 = document.createElement("textarea")
-    val4.id  = "boxx" + count
-    val4.cols = "20"
-    val4.rows = "30"
-    val4.placeholder = "Your comma separated list of data will appear here"
-    val4.style.width = "300px"
-    val4.style.fontSize = "20px";
-    val4.style.backgroundColor = vegeta ? "black" : "#ccffcc"
-    vegeta && (val4.style.color = 'white', val4.style.opacity = 0.5, val4.onmouseover = function(){val4.style.opacity = '1'}, val4.onmouseout = function(){val4.style.opacity = '0.5'})
-    val.append(val4)
-    val_og.append(val)
+    let textArea2 = document.createElement("textarea")
+    textArea2.id  = "boxx" + count
+    textArea2.cols = "20"
+    textArea2.rows = "30"
+    textArea2.placeholder = "Your comma separated list of data will appear here"
+    textArea2.style.width = "300px"
+    textArea2.style.fontSize = "20px";
+    textArea2.style.backgroundColor = vegeta ? "black" : "#ccffcc"
+    vegeta && (textArea2.style.color = 'white', textArea2.style.opacity = 0.5, textArea2.onmouseover = function(){textArea2.style.opacity = '1'}, textArea2.onmouseout = function(){textArea2.style.opacity = '0.5'})
+    textAreaDiv.append(textArea2)
+    containerDiv.append(textAreaDiv)
 
-    //End of text area
-    val = document.createElement("div")
-    val.id = "line"
-    val.style.display = "flex"
-    val.style.fontSize = "20px"
-    val.style.color = linecount ? linecount : "white"
+    //End of text area/creation of line div
+    let lineDiv = document.createElement("div")
+    lineDiv.id = "line"
+    lineDiv.style.display = "flex"
+    lineDiv.style.fontSize = "20px"
+    lineDiv.style.color = linecount ? linecount : "white"
     
-    let val5 = document.createElement("p")
+    //Creation of p element inside line div
+    let pElement = document.createElement("p")
     node = document.createTextNode("Line Count: ")
-    val5.append(node)
-    val.append(val5)
-    val5 = document.createElement("p")
-    //val5.id = "count" Old method
-    val5.id = "count" + (count + 1)
+    pElement.append(node)
+    lineDiv.append(pElement)
+    pElement = document.createElement("p")    
+    pElement.id = "count" + (count + 1)
     
-    val.append(val5)
+    lineDiv.append(pElement)
 
-    val_og.append(val)
+    containerDiv.append(lineDiv)
     // const value = document.getElementById("count4")
-    if (val3) {
-        val3.addEventListener("input", updateValue)
+    if (textArea1) {
+        textArea1.addEventListener("input", updateValue)
         function updateValue(e){
-            let temp = e.target.value
-            temp = temp.toString().replace(/(?!\s+$)\s+/g, ",")
-            val4.value = temp
-            let arr = val4.value.split(',')
-            val5.innerHTML = arr.length
+            let textArea1Content = e.target.value
+            textArea1Content = textArea1Content.toString().replace(/(?!\s+$)\s+/g, ",")
+            textArea2.value = textArea1Content
+            let textArea2Content = textArea2.value.split(',')
+            pElement.innerHTML = textArea2Content.length
         }
     }
-    val6.addEventListener('click', function(){
-        eraseText(val3,val4,inputval)
-        val5.innerHTML = "";
+    clearButton.addEventListener('click', function(){
+        eraseText(textArea1,textArea2,inputElement)
+        pElement.innerHTML = "";
     })
     count++               
 }
-window.addEventListener("beforeunload", (event) => {    
+
+window.addEventListener("beforeunload", () => {    
     let arr = []    
     for(let i = 0; i < textBox.length; i++){
         if (textBox[i] === 'boxxx' || textBox[i] === 'boxxxx') null
