@@ -84,13 +84,11 @@ const loadSaved = () => {
 
     let localVals = JSON.parse(localStorage.getItem("items"));      
     //Set theme on page open if exists
-    const theme = localStorage.getItem('theme');
+    const theme = localStorage.getItem('theme') ?? themes[0].id;
 
-    if (theme) {
-        const themeButton = $(theme);
+    const themeButton = $(theme);
 
-        themeButton.click();                
-    }
+    themeButton.click();
 
     document.body.style.display = 'inline';
 
