@@ -1,609 +1,834 @@
+const initialColorState = {
+    boxBg: null,
+    boxText: null,
+    popupBg: null,
+    popupText: null,
+    lineText: null,
+    inputBg: null,
+    inputText: null,
+    orderText: null,
+};
 
-let buttonb = null;let buttont = null;let boxb = null;let boxt = null;let popupb = null;let popupt = null;let linecount = null;let inputb = null;let inputt = null;let ordert = null
+const colors = {...initialColorState};
 
-function duplicate(a){
-    const alreadySeen = {}
-    let set = new Set()
-    let x = document.getElementById("snackbar2")
-    let closeOut = document.getElementById("snackButton")
-    let boxText = document.getElementById("boxxxx")
-    
-    a.forEach(str => alreadySeen[str] ? set.add(str) : alreadySeen[str] = true)
-    let setArray = [...set]
-    
-    set.size == 0 ? console.log("No duplicates found") : (
-        boxText.value = setArray.join('\n'),
+const state = {
+    textBox: ["box", "boxxx", "boxxxx"],
+    orderBox: ["order", "orderrr", "orderrr"],
+    count: 1,
+    vegeta: false,
+};
 
-        x.className = "show",
-        closeOut.addEventListener("click", (() => {
-            x.className = x.className.replace("show", "");
-        }))
-    )
-    if (setArray.join('\n') == "") x.className = x.className.replace("show", "");
-}
-function loadSaved(){
-    //Localstorage retrieval in case page closed by accident
-    const input = document.getElementById("box")
-    let localVals = JSON.parse(localStorage.getItem("items"))    
-    //Set theme on page open if exists
-    let theme = localStorage.getItem('theme')    
-    if (theme !== undefined && theme !== null){
-        let themeButton = document.getElementById(theme)
-        themeButton.click()
-        document.body.style.display = 'inline'        
+const links = {
+    'checkout': 'https://ims.fello.com/checking-out/',
+    'edit': 'https://ims.fello.com/order/edit/',
+    'mdm': 'https://a.simplemdm.com/admin/v2/devices?group=&order=name&orderD=desc&page=0&per=100&saveQuery=true&search=',
+};
 
-    }
-    else{
-        document.body.style.display = 'inline'        
-    }
+const $ = id => document.getElementById(id);
 
-    let addButton = document.getElementById("createFormButton")        
-    if (localVals !== null){
+const $$ = selector => document.querySelectorAll(selector);
 
-        if (localVals.length === 1){
-            input.value = localVals[0].data
-            document.getElementById('order').value = localVals[0].orderNum
-            document.getElementById('boxx').value = localVals[0].data.replace(/(?!\s+$)\s+/g, ",")
-            // console.log(localVals[0].data.split('\n'))
-            if (localVals[0].data !== '') document.getElementById('count1').innerHTML = localVals[0].data.split('\n').length
-        }
-        else{            
-            localVals.map((a,i) => {
-                // console.log(a)
-                if (i === 0){
-                    input.value = a.data
-                    document.getElementById('order').value = a.orderNum
-                    document.getElementById('boxx').value = a.data.replace(/(?!\s+$)\s+/g, ",")
-                    // console.log(a.data.split('\n').length)
-                    if (a.data !== '') document.getElementById('count1').innerHTML = a.data.split('\n').length                    
-                }
-                else{
-                    addButton.click()
-                    
-                    let name = "order" + i
-                    let name2 = "box" + i
-                    let name3 = "boxx" + i
-                    let name4 = "count" + (i + 1)
-                    document.getElementById(name).value = a.orderNum
-                    document.getElementById(name2).value = a.data
-                    document.getElementById(name3).value = a.data.replace(/(?!\s+$)\s+/g, ",")         
-                    if (a.data !== '') document.getElementById(name4).innerHTML = a.data.split('\n').length                                                    
-                    // console.log(a.data.split('\n').length)      
-                }          
-            })
-        }
+const setColors = (el, bg, color) => {
+    if (bg != null) el.style.backgroundColor = bg;
+
+    if (color != null) el.style.color = color;
+};
+
+const setMouseOpacity = (el, over, out) => {
+    el.onmouseover = () => el.style.opacity = over;
         
-    }
-}
+    el.onmouseout = () => el.style.opacity = out;
+};
 
-function addOrders(){
-    const text = document.getElementById("boxxx")
+const resetOpacity = (el) => {
+    el.style.opacity = '1';
+
+    el.onmouseover = '';
+        
+    el.onmouseout = '';
+};
+
+const duplicate = (array) => {
+    const alreadySeen = {};
+
+    const set = new Set();
+
+    const snack = $("snackbar2");
+
+    const closeOut = $("snackButton");
+
+    const boxText = $("boxxxx");
+    
+    array.forEach(str => alreadySeen[str] ? set.add(str) : alreadySeen[str] = true);
+
+    const setArray = [...set];
+
+    if (!set.size) {
+        console.log("No duplicates found");
+    } else {
+        boxText.value = setArray.join('\n');
+
+        snack.className = "show";
+        
+        closeOut.onclick = () => {
+            snack.className = snack.className.replace("show", "");
+        };
+    }
+
+    if (!setArray.length) snack.className = snack.className.replace("show", "");
+};
+
+const loadSaved = () => {
+    //Localstorage retrieval in case page closed by accident
+    const input = $("box");
+
+    let localVals = JSON.parse(localStorage.getItem("items"));      
+    //Set theme on page open if exists
+    const theme = localStorage.getItem('theme');
+
+    if (theme) {
+        const themeButton = $(theme);
+
+        themeButton.click();                
+    }
+
+    document.body.style.display = 'inline';
+
+    const addButton = $("createFormButton");
+
+    const isValid = localVals && localVals.some(val => val.data || val.orderNum);
+
+    if (isValid) {
+        localVals.forEach((val, index, arr) => {                
+            index && addButton.click();
+            
+            const indexVal = index || "";            
+            
+            $(`order${indexVal}`).value = val.orderNum;
+
+            $(`box${indexVal}`).value = val.data;
+
+            $(`boxx${indexVal}`).value = val.data.replace(/(?!\s+$)\s+/g, ",");
+
+            if (val.data !== '') {
+                const countId = arr.length === 1 ? 1 : index + 1;
+
+                $(`count${countId}`).innerHTML = val.data.split('\n').length;
+            }          
+        });
+    }    
+};
+
+const addOrders = () => {
+    const text = $("boxxx");
     // let temp = text.value.replaceAll('\n','')
-    let temp = text.value.split('\n').filter(a => a !== '')
+    let textValue = text.value.split('\n').filter(a => a !== '');
          
     // console.log(temp2)
-    if(temp.length > 0){
-        if (orderBox.length - 2 >= temp.length){                  
-            let temp2 = [...orderBox]
-            temp2.splice(1,2)  
-            for (let i = 0; i < temp.length; i++){            
-                document.getElementById(temp2[i]).value = temp[i]
+    if(textValue.length) {
+        if (state.orderBox.length - 2 >= textValue.length) {                  
+            const orderBoxCopy = [...state.orderBox];
+
+            orderBoxCopy.splice(1,2);
+
+            for (let i = 0; i < textValue.length; i++) {            
+                $(orderBoxCopy[i]).value = textValue[i];
             }
-        }
-        else{
-            let temp3 = temp.length - (orderBox.length - 2)
-            let addButton = document.getElementById("createFormButton")
-            for (let i = 0; i < temp3; i++) addButton.click()        
-            temp3 = [...orderBox]
-            temp3.splice(1,2)
-            for (let i = 0; i < temp.length; i++)  document.getElementById(temp3[i]).value = temp[i]        
+        } else {
+            const newLength = textValue.length - (state.orderBox.length - 2);
+
+            const addButton = $("createFormButton");
+
+            for (let i = 0; i < newLength; i++) addButton.click();
+
+            const orderBoxCopy = [...state.orderBox];
+
+            orderBoxCopy.splice(1,2);
+
+            for (let i = 0; i < textValue.length; i++)  $(orderBoxCopy[i]).value = textValue[i];        
         }
     }
-}
+};
 
 window.addEventListener("DOMContentLoaded", () => {    
-    loadSaved()
+    renderThemes();
+    renderLeaves();
+    renderRavensLogos();
+    renderChristmasicons();
+    loadSaved();
 
-    const log = document.getElementById("boxx")
-    const count = document.getElementById("count1")
-    const input = document.getElementById("box")    
+    const log = $("boxx");
+
+    const count = $("count1");
+
+    const input = $("box");
+
     if (input) {
-        input.addEventListener("input", updateValue)
-        function updateValue(e){
-            let temp = e.target.value
-            temp = temp.toString().replace(/(?!\s+$)\s+/g, ",")
-            log.value = temp
-            let arr = log.value.split(',')
-            count.innerHTML = arr.length                        
-        }
+        const updateValue = (e) => {
+            const value = e.target.value.toString().replace(/(?!\s+$)\s+/g, ",");
+            
+            log.value = value;
+            
+            count.innerHTML = log.value.split(',').length;                        
+        };
+
+        input.addEventListener("input", updateValue);    
     }
-    const text = document.getElementById("boxxx")
-    const count2 = document.getElementById("count0")
-    if (text) {
-        text.addEventListener("input", updateValue)
-        function updateValue(e){
-            let temp = e.target.value
-            let temp2 = temp.toString().replace(/,/g, "\n")
-            text.value = temp2
-            let arr2 = text.value.split('\n')
+
+    const text = $("boxxx");
+
+    const count2 = $("count0");
+
+    if (text) {        
+        const updateValue = (e) => {
+            const value = e.target.value.toString().replace(/,/g, "\n");
+            
+            text.value = value;            
             //allows the count to only utilize actual text, instead of black spaces from newline chars
-            arr2 = arr2.filter(a => a != '')
-            count2.innerHTML = arr2.length
-            setTimeout(()=>{
-                duplicate(arr2)
-            },500)            
-        }
+            const arr = text.value.split('\n').filter(a => a != '');
+            count2.innerHTML = arr.length;
+
+            setTimeout(() => {
+                duplicate(arr);
+            },500);            
+        };
+
+        text.addEventListener("input", updateValue);
     }    
     //Clear out data on page load after use
-    localStorage.removeItem('items')    
-})
+    localStorage.removeItem('items');
+    
+    const dropdown = $("dropdown");
 
-function hideRemoval(){
-    var text = document.getElementById("removal")
-    var buttonsrc = document.getElementById("removebutton")
-    console.log(buttonsrc.src)
-    if (text.hidden === false){
-    buttonsrc.src = 'show.png'
-    text.hidden = true
-    }
-    else{
-        buttonsrc.src = 'hide.png'
-        text.hidden = false
-    }
-}
+    const button = dropdown.querySelector(".dropbtn");
 
-var vegeta = false
-function DBZ(url, theme){
-    localStorage.setItem('theme', theme)
-    vegeta = true
-    // closeForm()
-    //Remove bottom buttons
-    // remove()    
-    //Remove main image
-    // var temp2 = document.getElementById("main")
-    // temp2.remove()
-    //Remove theme dropdown
-    // temp2 = document.getElementById("dropdown")
-    // temp2.remove()
-    let temp3 = document.querySelector(".node0 .info #order")
-    temp3.style.color = 'white';
+    button.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        dropdown.classList.toggle("open");
+    });
+    
+    document.addEventListener("click", () => {
+        dropdown.classList.remove("open");
+    });
+    
+    dropdown.querySelector(".dropdown-content").addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
+    const email = $("emailh");
+
+    email.addEventListener("click", () => {
+        email.classList.toggle("show");
+    });
+});
+
+const hideRemoval = () => {
+    const text = $("removal");
+
+    const buttonsrc = $("removebutton");    
+
+    buttonsrc.src = `images/${text.hidden ? 'hide.png' : 'show.png'}`;
+
+    text.hidden = !text.hidden;
+};
+
+const DBZ = (theme) => {
+    const {id, image, mode, contain} = theme;
+
+    localStorage.setItem('theme', id);
+
+    state.vegeta = true;
+
+    const orderNumberText = document.querySelector(".node0 .info #order");
+
+    orderNumberText.style.color = 'white';
     //Popup
-    let temp2 = document.getElementById("snackbar")
-    temp2.style.backgroundColor = 'black'
-    temp2.style.color = 'white'
+    ["snackbar", "snackbar2", "added", "removed"].forEach(val => {
+        setColors($(val), "black", "white");
+    });    
 
-    temp2 = document.getElementById("snackbar2")
-    temp2.style.backgroundColor = 'black'
-    temp2.style.color = 'white'
+    //Change background theme        
+    $("leaves").style.display = mode ? "none" : "";
+    $("ravens").style.display = mode === "ravens" ? "" : "none";
+    $("christmas").style.display = mode === "christmas" ? "" : "none";
+
+    Object.assign(document.body.style, {
+        backgroundImage: `url(images/${image})`,
+        backgroundSize: contain ? "contain" : "cover",
+        backgroundColor: "black",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
+    });
+
+    const isAutumnGif = (image === 'autumn.gif');
+
+    $$("iframe").forEach(frame => {
+        frame.style.display = isAutumnGif ? '' : 'none';
+    });
     
-    temp2 = document.getElementById("added")
-    temp2.style.backgroundColor = 'black'
-    temp2.style.color = 'white'
-    temp2 = document.getElementById("removed")
-    temp2.style.backgroundColor = 'black'
-    temp2.style.color = 'white'
+    const newPic = $('newButtonCont2');
 
-    //Change background theme    
-    if (url == 'vegeta.jpg'){
-        document.body.style.backgroundImage = "url('vegeta.jpg')"
-        document.body.style.backgroundSize = "contain"
-        let temp = document.getElementById("leaves")
-        temp.style.display = 'none'
-        temp = document.getElementById("christmas")
-        temp.style.display = 'none'
-        
-        temp = document.getElementById("ravens")
-        temp.style.display = ''
-    }
-    else if (url == 'coffee.gif' || url == 'winter.webp'){
-        let temp = document.getElementById("leaves")
-        temp.style.display = 'none'
-        temp = document.getElementById("ravens")
-        temp.style.display = 'none'
-        temp = document.getElementById("christmas")
-        temp.style.display = ''
-        
-    }
-    else{    
-        let temp = document.getElementById("leaves")
-        temp.style.display = ''
-        temp = document.getElementById("ravens")
-        temp.style.display = 'none'
-        temp = document.getElementById("christmas")
-        temp.style.display = 'none'
-    }
+    setMouseOpacity(newPic, '1', '0.7');
 
-    document.body.style.backgroundImage = `url(${url})`
-    document.body.style.backgroundSize = "cover"
-    if (url == 'autumn.gif'){
-        Array.from(document.getElementsByTagName("iframe"))
-            .map(i => i.style.display = '' )
-    }
-    else{
-        Array.from(document.getElementsByTagName("iframe"))
-            .map(i => i.style.display = 'none' )
-    }                        
-        
-    document.body.style.backgroundColor = 'black'
-    // document.body.style.backgroundSize = "contain"
-    document.body.style.backgroundRepeat = "no-repeat"
-    document.body.style.backgroundPosition = "center center"
-    // document.body.style.width = "100%"
-    let newPic = document.getElementById('newButtonCont2')
-    newPic.style.opacity = '0.7';
-    newPic.onmouseover = function(){newPic.style.opacity = '1'}, newPic.onmouseout = function(){newPic.style.opacity = '0.7'}
-    newPic.style.maxWidth = 'fit-content'
-    
-    Array.from(document.getElementsByClassName('newButtonCont')) 
-    .map(b => {b.style.opacity = '0.7',b.onmouseover = function(){b.style.opacity = '1'}, b.onmouseout = function(){b.style.opacity = '0.7'}})
-    // Array.from(document.getElementsByClassName("textButton"))
-    // .map(b => {b.style.opacity = '0.5'})
+    Object.assign(newPic.style, {
+        opacity: '0.7',
+        maxWidth: 'fit-content',
+    });
 
-    Array.from(document.getElementsByTagName("input"))
-    .map(b => {b.style.color = 'white', b.style.backgroundColor = 'black'})
+    $$(".newButtonCont").forEach(btn => {
+        btn.style.opacity = '0.7';
 
-    // Array.from(document.getElementsByTagName("button"))
-    // .map(b => {b.style.color = 'white', b.style.backgroundColor = 'black', b.style.border = '2px solid white'})
-    
-    Array.from(document.getElementsByTagName("textarea"))
-    .map(b => {b.style.background = 'black',b.style.color = 'white',b.style.opacity = '0.5', b.onmouseover = function(){b.style.opacity = '1'}, b.onmouseout = function(){b.style.opacity = '0.5'}})
+        setMouseOpacity(btn, '1', '0.7');
+    });
 
-    Array.from(document.getElementsByTagName("label"))
-    .map(b => {b.style.color = 'black',b.style.color = 'white'} )
+    $$("input").forEach(input => {
+        setColors(input, "black", "white");
+    });
 
-    Array.from(document.getElementsByTagName("p"))
-    .map(b =>  b.style.color = 'white' )
+    $$("textarea").forEach(area => {
+        setColors(area, "black", "white");
 
-    buttonb = null
-    buttont = null
-    boxb = null
-    boxt = null
-    popupb = null
-    popupt = null
-    linecount = null
-    inputb = null
-    inputt = null
-    ordert = null
-}
+        area.style.opacity = '0.5';
 
-function eraseText(param1, param2, param3){
-    if (param1.id == 'boxxx'){
-        document.getElementById(param1.id).value = "";
-        document.getElementById("count0").innerHTML = "";
-        let x = document.getElementById("snackbar2")
-        x.className = x.className.replace("show", "")
-    }
-    else{
-        document.getElementById(param1.id).value = "";
-        document.getElementById(param2.id).value = "";
-        document.getElementById(param3.id).value = "";
-        if (param1.id === 'box'){
-            document.getElementById("count1").innerHTML = "";
+        setMouseOpacity(area, '1', '0.5');
+    });
+
+    ["label", "p"].forEach(selector =>
+        $$(selector).forEach(el => {
+            el.style.color = "white";
+        })
+    );
+
+    Object.assign(colors, initialColorState);
+};
+
+const eraseText = (param1, param2, param3) => {    
+    $(param1.id).value = "";
+
+    if (param1.id == 'boxxx') {        
+        $("count0").innerHTML = "";
+
+        const snack = $("snackbar2");
+
+        snack.className = snack.className.replace("show", "");
+    } else {        
+        $(param2.id).value = "";
+
+        $(param3.id).value = "";
+
+        if (param1.id === 'box') {
+            $("count1").innerHTML = "";
         }
     }
-}
+};
 
-function copyCSV(param) {
-    if (param === 'removed' || param === 'added'){
-        var x = document.getElementById(param);
-        x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1500);
-    }
-    else{
-        var copyText = document.getElementById(param.id);
+const copyCSV = (param) => {
+    if (["removed", "added"].includes(param)) {
+        const snack = $(param);
+
+        snack.className = "show";
+
+        setTimeout(() => {
+            snack.className = snack.className.replace("show", "");
+        }, 1500);
+    } else {
+        const copyText = $(param.id);
+
         copyText.select();
+
         copyText.setSelectionRange(0, 99999);
+
         navigator.clipboard.writeText(copyText.value);
         
-        var x = document.getElementById("snackbar");
-        x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        const snack = $("snackbar");
+
+        snack.className = "show";
+
+        setTimeout(() => {
+            snack.className = snack.className.replace("show", "");
+        }, 3000);
     }
-}
+};
 
-function checkout(param){
-    var temp = document.getElementById(param.id).value
-    if (temp) window.open('https://ims.fello.com/checking-out/' + temp, '_blank')
-    else null
-}
+const openLink = (el, type) => {
+    const elValue = $(el.id).value;    
 
-function edit(param){
-    var temp = document.getElementById(param.id).value
-    if (temp) window.open('https://ims.fello.com/order/edit/' + temp, '_blank')
-    else null
-}
+    if (elValue) {
+        const url = links[type];
 
-function openMdm(param){
-    var temp = document.getElementById(param.id).value
-    if (temp) window.open('https://a.simplemdm.com/admin/v2/devices?group=&order=name&orderD=desc&page=0&per=100&saveQuery=true&search=' + temp, '_blank')
-    else null
-}
-
-//Push original three textboxes into stack
-var textBox = []
-textBox.push("box", "boxxx", "boxxxx")        
-
-var orderBox = []
-//Push original order field with 2 dummy vals to line up w/ above when using localstorage
-orderBox.push("order", "orderrr", "orderrr")
-
-function changeCol(col1,col2){
-    localStorage.removeItem('theme')
-    //Change back to leaves and original color schemes
-    vegeta = false
-    let theme = document.getElementById("leaves")
-    theme.style.display = ''
-    theme = document.getElementById("ravens")
-    theme.style.display = 'none'
-    theme = document.getElementById("christmas")
-    theme.style.display = 'none'
-    //Remove charlie brown gifs from autumn theme
-    Array.from(document.getElementsByTagName("iframe"))
-        .map(i => i.style.display = 'none' )
-
-    for(let i = 0; i < textBox.length; i++){
-        let temp = document.getElementById(textBox[i])
-        temp.style.backgroundColor = col1
-        temp.style.color = col2
+        window.open(`${url}${elValue}`, '_blank');
     }
-    boxb = col1
-    boxt = col2
+};
 
-    var temp = document.getElementsByTagName("body")[0]
-    if (col2 === 'red') temp.style.background = "linear-gradient(95deg, #972c2c, black)"
-    else if (col1 === 'white') temp.style.background = "rgb(250, 249, 246)"  
-    else temp.style.background = col1
+const changeCol = (col1, col2, id) => {
+    localStorage.setItem('theme', id);
+    
+    state.vegeta = false;
 
-    temp = document.getElementById("snackbar")
-    temp.style.backgroundColor = col1
-    popupb = col1
-    temp.style.color = col2
-    popupt = col2
+    ["leaves", "ravens", "christmas"].forEach((theme, index) => {
+        const el = $(theme);
 
-    temp = document.getElementById("snackbar2")
-    temp.style.backgroundColor = col1
-    popupb = col1
-    temp.style.color = col2
-    popupt = col2
+        el.style.display = index ? 'none' : '';
+    });
 
-    temp = document.getElementById("added")
-    temp.style.backgroundColor = col1
-    temp.style.color = col2
-    popupb = col1
-    popupt = col2
+    $$("iframe").forEach(frame => {
+        frame.style.display = 'none';
+    });
 
-    var temp = document.getElementById("removed")
-    temp.style.backgroundColor = col1
-    temp.style.color = col2
-    popupb = col1
-    popupt = col2
+    state.textBox.forEach(box => {
+        const el = $(box);
 
-    Array.from(document.getElementsByTagName("p"))
-    .map(b => col2 === 'black' ? (b.style.color = col2, linecount = col2) : (b.style.color = 'white', linecount = 'white') ) 
+        setColors(el, col1, col2);
+    });
 
-    Array.from(document.getElementsByTagName("input"))
-    .map((b,i) => {(b.style.color = col2, inputt = col2, col1 === 'white' ? (b.style.backgroundColor = 'lightgray', inputb = 'lightgray') : (b.style.backgroundColor = col1, inputb = col1))} )
+    const col2Black = (col2 === 'black');
+    const col1White = (col1 === 'white');
 
-    Array.from(document.getElementsByTagName("label"))
-    .map((b,i) => col2 === 'black' ? (b.style.color = col2, ordert = col2) : (b.style.color = 'white', ordert = 'white') )
+    Object.assign(colors, {        
+        boxBg: col1,
+        boxText: col2,
+        popupBg: col1,
+        popupText: col2,
+        inputText: col2,
+        inputBg: col1White ? 'lightgray' : col1,
+        orderText: col2Black ? col2 : 'white',
+        lineText: col2Black ? col2 : 'white',
+    });
 
-    Array.from(document.getElementsByTagName("textarea"))
-    .map((b,i) => {b.style.opacity = '1', b.onmouseover = '', b.onmouseout = '', ((i % 2 === 0 && i > 2) || i === 1 || i === 3) ? (b.style.background = col1, b.style.color = col2) : (b.style.background = '#ccffcc',b.style.color = 'black')})
+    const body = document.body;
+    
+    if (col2 === 'red') {
+        body.style.background = "linear-gradient(95deg, #972c2c, black)";
+    } else if (col1 === 'white') {
+        body.style.background = "rgb(250, 249, 246)";
+    } else {
+        body.style.background = col1;
+    }
 
-    Array.from(document.getElementsByClassName('newButtonCont')) 
-    .map(b => {b.style.opacity = '1',b.onmouseover = '', b.onmouseout = ''})   
+    ["snackbar", "snackbar2", "added", "removed"].forEach(val => {
+        setColors($(val), col1, col2);
+    });
 
-    temp = document.getElementById('newButtonCont2') 
-    temp.style.opacity = '1'
-    temp.onmouseover = ''
-    temp.onmouseout = ''
-}
+    $$("p").forEach(paragraph => {
+        paragraph.style.color = col2Black ? col2 : 'white';
+    });
 
-var count = 1
-function createForm(){    
-    copyCSV('added')
-    let insidecount = count
+    $$("input").forEach(input => {
+        setColors(input, col1White ? 'lightgray' : col1, col2);        
+    });
+
+    $$("label").forEach(label => {
+        label.style.color = col2Black ? col2 : 'white';
+    });
+
+    $$("textarea").forEach((area, index) => {
+        resetOpacity(area);
+
+        //the duplicate textarea is actually first element selected
+        if ((index % 2 === 0 && index > 2) || index === 1 || index === 3) {
+            setColors(area, col1, col2);
+        } else {
+            setColors(area, '#ccffcc', 'black');
+        }
+    });
+
+    $$(".newButtonCont").forEach(btn => {
+        resetOpacity(btn);
+    });
+
+    const btn = $('newButtonCont2');
+
+    resetOpacity(btn);
+};
+
+const createForm = () => {    
+    copyCSV('added');
+
+    let insidecount = state.count;
 
     //Creation of div inside of main div "magic"
-    let containerDiv = document.createElement("div")
-    containerDiv.style.animation = 'fadeIn 1.5s'
-    containerDiv.classList.add("node" + count)
+    const containerDiv = document.createElement("div");
+
+    containerDiv.style.animation = 'fadeIn 1.5s';
+
+    containerDiv.classList.add("node" + state.count);
 
     //Main project container
-    const magic = document.getElementById("magic")
-    magic.append(containerDiv)
+    const magic = document.getElementById("magic");
+
+    magic.append(containerDiv);
 
     //Creation of close button element
-    let deleteForm = document.createElement("img")
-    deleteForm.src = 'close.png'
-    deleteForm.style.width = '22px'
-    deleteForm.style.marginLeft = '50%';
-    deleteForm.style.cursor = 'pointer';
-    deleteForm.style.marginBottom = '10px';
-    deleteForm.style.background = 'white';
-    deleteForm.style.borderRadius = '16px';
-    deleteForm.onmouseover = function(){deleteForm.classList.add('hovered')}
-    deleteForm.onmouseout = function(){deleteForm.classList.remove('hovered')}
-    deleteForm.addEventListener('click', function(){
-        containerDiv.remove()
-        let x = textBox.indexOf('box' + insidecount)
+    const deleteForm = document.createElement("img");
+
+    deleteForm.src = 'images/close.png';
+    deleteForm.classList.add("deleteButton");
+
+    Object.assign(deleteForm.style, {
+        width: '22px',
+        marginLeft: '50%',
+        cursor: 'pointer',
+        marginBottom :'10px',
+        background: 'white',
+        borderRadius: '16px',
+    });
+
+    deleteForm.onmouseover = () => {deleteForm.classList.add('hovered')};
+
+    deleteForm.onmouseout = () => {deleteForm.classList.remove('hovered')};
+
+    deleteForm.addEventListener('click', () => {
+        containerDiv.remove();
+
+        const index = state.textBox.indexOf(`box${insidecount}`);
         //Removes orderbox in same place as text box to ensure local storage functions properly
-        textBox.splice(x, 1)
-        orderBox.splice(x, 1)            
-        copyCSV('removed')
+        state.textBox.splice(index, 1);
+        
+        state.orderBox.splice(index, 1);
+
+        copyCSV('removed');
     })
-    containerDiv.append(deleteForm)
+
+    containerDiv.append(deleteForm);
 
     //Creation of info div
-    let infoDiv = document.createElement("div")
-    infoDiv.classList.add("info")
-    containerDiv.append(infoDiv)
+    const infoDiv = document.createElement("div");
+
+    infoDiv.classList.add("info");
+
+    containerDiv.append(infoDiv);
 
     //Creation of label element
-    let label = document.createElement("label")
-    label.htmlFor = "order" + count
-    infoDiv.append(label)
-    let node = document.createTextNode("Order# ")
+    const label = document.createElement("label");
+
+    label.htmlFor = "order" + state.count;
+
+    infoDiv.append(label);
+
+    const node = document.createTextNode("Order# ");
     //Creation of bold element
-    let boldElement = document.createElement("b")
-    label.style.color = ordert ? ordert : 'white'
-    boldElement.append(node)
-    label.append(boldElement)
+    const boldElement = document.createElement("b");
+
+    label.style.color = colors.orderText ? colors.orderText : 'white';
+
+    boldElement.append(node);
+
+    label.append(boldElement);
 
     //Creation of input element
-    let inputElement = document.createElement("input")
-    inputElement.type = 'text'
-    inputElement.name = 'order' + count
-    inputElement.id = 'order' + count
-    orderBox.push(inputElement.id)
-    inputElement.placeholder = 'SQ1234'
-    infoDiv.append(inputElement);
-    vegeta ? inputElement.style.color = 'white' : inputt ? inputElement.style.color = inputt : null
-    inputElement.style.backgroundColor = inputb ? inputb : null
-   
-    let topButtonContainer = document.createElement("div")
-    topButtonContainer.classList.add('newButtonCont')
-    // vegeta ? topButtonContainer.style.opacity = '0.7' : '1'
-    vegeta && (topButtonContainer.style.opacity = '0.7', topButtonContainer.onmouseover = function(){topButtonContainer.style.opacity = '1'}, topButtonContainer.onmouseout = function(){topButtonContainer.style.opacity = '0.7'})
-    topButtonContainer.style.display = "flex"
-    topButtonContainer.style.background = "white"
-    topButtonContainer.style.width = "296px"
-    topButtonContainer.style.justifyContent = "space-between"
-    topButtonContainer.style.borderRadius = "16px"
-    //Clear Img
-    let clearButton = document.createElement("img")
-    clearButton.addEventListener('click', function(){
-        eraseText(boldElement,textArea2,inputElement)
-    })
+    const inputElement = document.createElement("input");
+
+    Object.assign(inputElement, {
+        type: 'text',
+        name: 'order' + state.count,
+        id: 'order' + state.count,
+        placeholder: 'SQ1234',
+    });
+
+    state.orderBox.push(inputElement.id);
     
-    clearButton.src = 'clear.png'
-    clearButton.classList.add('textButton')
-    topButtonContainer.append(clearButton)
+    infoDiv.append(inputElement);
+
+    setColors(inputElement, colors.inputBg, state.vegeta ? 'white' : colors.inputText);
+   
+    const topButtonContainer = document.createElement("div");
+
+    topButtonContainer.classList.add('newButtonCont');
+
+    if (state.vegeta) {
+        setMouseOpacity(topButtonContainer, '1', '0.7');
+    }
+
+    Object.assign(topButtonContainer.style, {
+        display: "flex",
+        background: "white",
+        width: "296px",
+        justifyContent: "space-between",
+        borderRadius: "16px",
+        ...(state.vegeta ? {opacity: '0.7'} : {}),
+    });
+
+    //Clear Img
+    const clearButton = document.createElement("img");
+    
+    clearButton.src = 'images/clear.png';
+
+    clearButton.classList.add('textButton');
+
+    topButtonContainer.append(clearButton);
     
     //Edit Image
-    let imgButton = document.createElement("img")
-    imgButton.addEventListener('click', function(){
-        if (inputElement.value) window.open('https://ims.fello.com/order/edit/' + inputElement.value, '_blank')
-        else null
-    })    
-    imgButton.src = 'edit.png'
-    imgButton.classList.add('textButton')
-    topButtonContainer.append(imgButton)
+    const editButton = document.createElement("img");
+
+    editButton.addEventListener('click', () => {
+        if (inputElement.value) window.open(links['edit'] + inputElement.value, '_blank');        
+    });
+
+    editButton.src = 'images/edit.png';
+
+    editButton.classList.add('textButton');
+
+    topButtonContainer.append(editButton);
     
     //Checkout Image
-    imgButton = document.createElement("img")
-    imgButton.addEventListener('click', function(){
-        if (inputElement.value) window.open('https://ims.fello.com/checking-out/' + inputElement.value, '_blank')
-        else null
-    })    
-    imgButton.src = 'checkout.png'
-    imgButton.classList.add('textButton')
-    topButtonContainer.append(imgButton)
+    const checkoutButton = document.createElement("img");
+
+    checkoutButton.addEventListener('click', () => {
+        if (inputElement.value) window.open(links['checkout'] + inputElement.value, '_blank');        
+    });
+
+    checkoutButton.src = 'images/checkout.png';
+
+    checkoutButton.classList.add('textButton');
+
+    topButtonContainer.append(checkoutButton);
 
     //Copy CSV Img
-    imgButton = document.createElement("img")
-    imgButton.addEventListener('click', function(){
+    const copyButton = document.createElement("img");
+
+    copyButton.addEventListener('click', () => {
         textArea2.select();
+
         textArea2.setSelectionRange(0, 99999);
+
         navigator.clipboard.writeText(textArea2.value);
-        var x = document.getElementById("snackbar");
-        x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-    })    
-    imgButton.src = 'copy.png'
-    imgButton.classList.add('textButton')
-    topButtonContainer.append(imgButton)
 
-    imgButton = document.createElement("img")
-    imgButton.addEventListener('click', function(){
-        if (inputElement.value) window.open('https://a.simplemdm.com/admin/v2/devices?group=&order=name&orderD=desc&page=0&per=100&saveQuery=true&search=' + inputElement.value, '_blank')            
-        else null
-    })    
-    imgButton.src = 'mdm.png'
-    imgButton.classList.add('textButton')
-    topButtonContainer.append(imgButton)
+        const snack = document.getElementById("snackbar");
 
-    infoDiv.append(topButtonContainer)
+        snack.className = "show";
+
+        setTimeout(() => {
+            snack.className = snack.className.replace("show", "");
+        }, 3000);
+    });
+
+    copyButton.src = 'images/copy.png';
+
+    copyButton.classList.add('textButton');
+
+    topButtonContainer.append(copyButton);
+    
+    const mdmButton = document.createElement("img");
+
+    mdmButton.addEventListener('click', () => {
+        if (inputElement.value) window.open(links['mdm'] + inputElement.value, '_blank');        
+    });
+
+    mdmButton.src = 'images/mdm.png';
+
+    mdmButton.classList.add('textButton');
+
+    topButtonContainer.append(mdmButton);
+
+    infoDiv.append(topButtonContainer);
 
     //Text areas start here
-    let textAreaDiv = document.createElement("div")
-    textAreaDiv.style.display = "flex"
+    const textAreaDiv = document.createElement("div");
 
-    let textArea1 = document.createElement("textarea")
-    textArea1.id  = "box" + count
-    textBox.push(textArea1.id)    
-    textArea1.cols = "20"
-    textArea1.rows = "30"
-    textArea1.placeholder = "Enter (or paste) your column of data here"
-    textArea1.style.width = "160px"
-    textArea1.style.fontSize = "20px";
-    textArea1.style.backgroundColor = boxb ? boxb : "black"
-    vegeta ? textArea1.style.color =  "white" : boxt ? textArea1.style.color =  boxt : textArea1.style.color =  "red"
-    vegeta && (textArea1.style.opacity = 0.5, textArea1.onmouseover = function(){textArea1.style.opacity = '1'}, textArea1.onmouseout = function(){textArea1.style.opacity = '0.5'})    
+    textAreaDiv.style.display = "flex";
+
+    const textArea1 = document.createElement("textarea");
+
+    Object.assign(textArea1, {
+        id: `box${state.count}`,
+        cols: "20",
+        rows: "30",
+        placeholder: "Enter (or paste) your column of data here",
+    });    
+
+    state.textBox.push(textArea1.id);
+
+    Object.assign(textArea1.style, {
+        width: "160px",
+        fontSize: "20px",
+        backgroundColor: colors.boxBg ?? "black",
+        color: state.vegeta ? "white" : colors.boxText ?? "red",
+    });
+
+    if (state.vegeta) {
+        textArea1.style.opacity = 0.5;
+
+        setMouseOpacity(textArea1, '1', '0.5');
+    }   
     
-    textAreaDiv.append(textArea1)
+    textAreaDiv.append(textArea1);
 
-    let textArea2 = document.createElement("textarea")
-    textArea2.id  = "boxx" + count
-    textArea2.cols = "20"
-    textArea2.rows = "30"
-    textArea2.placeholder = "Your comma separated list of data will appear here"
-    textArea2.style.width = "300px"
-    textArea2.style.fontSize = "20px";
-    textArea2.style.backgroundColor = vegeta ? "black" : "#ccffcc"
-    vegeta && (textArea2.style.color = 'white', textArea2.style.opacity = 0.5, textArea2.onmouseover = function(){textArea2.style.opacity = '1'}, textArea2.onmouseout = function(){textArea2.style.opacity = '0.5'})
-    textAreaDiv.append(textArea2)
-    containerDiv.append(textAreaDiv)
+    const textArea2 = document.createElement("textarea");
+
+    Object.assign(textArea2, {
+        id: `boxx${state.count}`,
+        cols: "20",
+        rows: "30",
+        placeholder: "Your comma separated list of data will appear here",
+    });
+
+    Object.assign(textArea2.style, {
+        width: "300px",
+        fontSize: "20px",
+        backgroundColor:  state.vegeta ? "black" : "#ccffcc",
+        ...(state.vegeta ? {color: 'white'} : {}),        
+    });
+
+    if (state.vegeta) {
+        Object.assign(textArea2.style, {
+            color: 'white',
+            opacity: 0.5,
+        });
+
+        setMouseOpacity(textArea2, '1', '0.5');
+    }
+
+    textAreaDiv.append(textArea2);
+
+    containerDiv.append(textAreaDiv);
 
     //End of text area/creation of line div
-    let lineDiv = document.createElement("div")
-    lineDiv.id = "line"
-    lineDiv.style.display = "flex"
-    lineDiv.style.fontSize = "20px"
-    lineDiv.style.color = linecount ? linecount : "white"
+    const lineDiv = document.createElement("div");
+
+    lineDiv.id = "line";
+
+    Object.assign(lineDiv.style, {
+        display: "flex",
+        fontSize :"20px",
+        color: colors.lineText ?? "white",
+    });
     
     //Creation of p element inside line div
-    let pElement = document.createElement("p")
-    node = document.createTextNode("Line Count: ")
-    pElement.append(node)
-    lineDiv.append(pElement)
-    pElement = document.createElement("p")    
-    pElement.id = "count" + (count + 1)
-    
-    lineDiv.append(pElement)
+    const pElement = document.createElement("p");
 
-    containerDiv.append(lineDiv)
+    const pNode = document.createTextNode("Line Count: ");
+
+    pElement.append(pNode);
+
+    lineDiv.append(pElement);
+
+    const pCountElement = document.createElement("p") ;
+
+    pCountElement.id = "count" + (state.count + 1);
+
+    lineDiv.append(pCountElement);
+
+    containerDiv.append(lineDiv);
     // const value = document.getElementById("count4")
-    if (textArea1) {
-        textArea1.addEventListener("input", updateValue)
-        function updateValue(e){
-            let textArea1Content = e.target.value
-            textArea1Content = textArea1Content.toString().replace(/(?!\s+$)\s+/g, ",")
-            textArea2.value = textArea1Content
-            let textArea2Content = textArea2.value.split(',')
-            pElement.innerHTML = textArea2Content.length
-        }
-    }
-    clearButton.addEventListener('click', function(){
-        eraseText(textArea1,textArea2,inputElement)
-        pElement.innerHTML = "";
-    })
-    count++               
-}
+    const updateValue = (e) => {
+        const textArea1Content = e.target.value.toString().replace(/(?!\s+$)\s+/g, ",");
+        
+        textArea2.value = textArea1Content;
+        
+        pCountElement.innerHTML = textArea2.value.split(',').length;
+    };
+
+    textArea1.addEventListener("input", updateValue); 
+
+    clearButton.addEventListener('click', () => {
+        eraseText(textArea1, textArea2, inputElement);
+
+        pCountElement.innerHTML = "";
+    });
+
+    state.count++;               
+};
 
 window.addEventListener("beforeunload", () => {    
-    let arr = []    
-    for(let i = 0; i < textBox.length; i++){
-        if (textBox[i] === 'boxxx' || textBox[i] === 'boxxxx') null
-        else{
-            let temp = document.getElementById(textBox[i])                         
-            let val = document.getElementById(orderBox[i])
-            
-            arr.push({ data: temp.value, orderNum: val.value })            
-        }        
-    }
-    localStorage.setItem("items", JSON.stringify(arr))        
-        
-    return ''
-})
+    const arr = [];
+    
+    for (let i = 0; i < state.textBox.length; i++) {
+        if (!["boxxx", "boxxxx"].includes(state.textBox[i])) {
+            const textbox = document.getElementById(state.textBox[i]);
 
+            const order = document.getElementById(state.orderBox[i]);
+            
+            arr.push({data: textbox.value, orderNum: order.value});
+        }        
+    }    
+
+    localStorage.setItem("items", JSON.stringify(arr));        
+        
+    return '';
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const themes = [
+    {id: "original", label: "Original", action: () => changeCol("black", "red", "original")},
+    {id: "dark", label: "Dark", action: () => changeCol("black", "white", "dark")},
+    {id: "theme1", label: "Jay", image: "vegeta.jpg", mode: "ravens", contain: true},
+    {id: "theme2", label: "fw", image: "fw.png"},
+    {id: "theme3", label: "japan", image: "japan.gif"},
+    {id: "theme4", label: "fall", image: "autumn.gif"},
+    {id: "theme5", label: "vw", image: "vaporwave.gif"},
+    {id: "theme6", label: "dusk", image: "dusk.gif"},
+    {id: "theme7", label: "winter1", image: "coffee.gif", mode: "christmas"},
+    {id: "theme8", label: "winter2", image: "winter.webp", mode: "christmas"},
+    {id: "theme9", label: "8bit", image: "8bit.gif"},
+    {id: "theme10", label: "trees", image: "trees.png"},
+    {id: "theme11", label: "future", image: "future.jpg"},
+    {id: "theme12", label: "island", image: "island.png"},
+    {id: "theme13", label: "forest", image: "forest.jpg"},
+    {id: "theme14", label: "halo3", image: "halo3.jpg"},
+    {id: "theme15", label: "celeste", image: "celeste.avif"},
+    {id: "theme16", label: "sunset", image: "vwsunset.gif"},
+    {id: "theme17", label: "sunset2", image: "vwsunset2.jpg"},
+    {id: "theme18", label: "spring", image: "spring.jpg"},
+    {id: "theme19", label: "spring2", image: "spring2.jpg"},
+    {id: "theme20", label: "bridge", image: "bridge.jpg"},
+    {id: "theme21", label: "splash", image: "watersplash.png"},
+    {id: "theme22", label: "beach", image: "beach.gif"},
+    {id: "theme23", label: "pier", image: "sunset.jpg"},
+    {id: "theme24", label: "fall2", image: "autumn.jpg"},
+    {id: "theme25", label: "summer1", image: "summer1.jpg"},
+    {id: "theme26", label: "summer2", image: "summer2.jpg"},
+];
+
+const renderThemes = () => {
+    const container = document.querySelector(".dropdown-content");
+
+    container.innerHTML = "";
+
+    themes.forEach((theme) => {
+        const btn = document.createElement("button");
+
+        Object.assign(btn, {
+            className: "theme",
+            id: theme.id,
+            textContent: theme.label,            
+        });
+
+        btn.onclick = () => {
+            if (theme.action) {
+                theme.action();
+            } else {
+                DBZ(theme);
+            }
+
+            //$("dropdown").classList.remove("open");
+        };
+
+        container.appendChild(btn);
+    });
+};
+
+const renderLeaves = () => {
+    const baseLeaves = ["redleaf.png", "orangeleaf.png", "yellowleaf.png", "greenleaf.png"];
+
+    const leaves = [...baseLeaves, ...baseLeaves];
+
+    document.getElementById("leaves").innerHTML = leaves.map(img => `<img src="images/${img}">`).join("");
+};
+
+const renderRavensLogos = () => {
+    const baseLogos = ["ravens.jpg", "ravens2.png"];
+
+    const logos = Array(4).fill(baseLogos).flat();
+
+    document.getElementById("ravens").innerHTML = logos.map(img => `<img style="width: 40px;" src="images/${img}">`).join("");
+};
+
+const renderChristmasicons = () => {
+    const baseIcons = ["candy-canes.png", "gift-box.png"];
+
+    const icons = Array(4).fill(baseIcons).flat();
+
+    document.getElementById("christmas").innerHTML = icons.map(img => `<img style="width: 40px;" src="images/${img}">`).join("");
+};

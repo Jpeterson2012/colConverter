@@ -1,171 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV Converter</title>
-    <link rel="icon" type="image" href="redleaf.png" />
-    <link rel="stylesheet" href="index.css"/>        
-    <script src="index.js"></script>
-</head>
-<body>
-    <div id="leaves" class="leaves">
-        <img src="redleaf.png">
-        <img src="orangeleaf.png">
-        <img src="yellowleaf.png">
-        <img src="greenleaf.png">
-        <img src="redleaf.png">
-        <img src="orangeleaf.png">
-        <img src="yellowleaf.png">
-        <img src="greenleaf.png">
-    </div>
-    <div id="ravens" class="leaves" style="display: none;">
-        <img src="ravens.jpg" style="width: 40px;">
-        <img src="ravens2.png" style="width: 40px;">
-        <img src="ravens.jpg" style="width: 40px;">
-        <img src="ravens2.png" style="width: 40px;">
-        <img src="ravens.jpg" style="width: 40px;">
-        <img src="ravens2.png" style="width: 40px;">
-        <img src="ravens.jpg" style="width: 40px;">
-        <img src="ravens2.png" style="width: 40px;">
-    </div>
-    <div id="christmas" class="leaves" style="display: none;">
-        <img src="candy-canes.png" style="width: 40px;">
-        <img src="gift-box.png" style="width: 40px;">
-        <img src="candy-canes.png" style="width: 40px;">
-        <img src="gift-box.png" style="width: 40px;">
-        <img src="candy-canes.png" style="width: 40px;">
-        <img src="gift-box.png" style="width: 40px;">
-        <img src="candy-canes.png" style="width: 40px;">
-        <img src="gift-box.png" style="width: 40px;">
-    </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CSV Converter</title>
+        <link rel="icon" type="image" href="images/redleaf.png" />
+        <link rel="stylesheet" href="index.css"/>        
+        <script src="index.js"></script>
+    </head>
 
-    <div class="dropdown" id="dropdown">
-    <button class="dropbtn">Theme</button>
-    <div class="dropdown-content">
-        <button class="theme" onclick="changeCol('black','red')">Original</button>
-        <!-- <button class="theme" onclick="changeCol('white','black')">Light</button> -->
-        <Button class="theme" onclick="changeCol('black','white')">Dark</Button>                
-        <button id="theme1" class="theme" onclick="DBZ('vegeta.jpg', 'theme1')">Jay</a>
-        <button id="theme2" class="theme" onclick="DBZ('fw.png','theme2')">fw</a>
-        <button id="theme3" class="theme" onclick="DBZ('japan.gif', 'theme3')">japan</a>
-        <button id="theme4" class="theme" onclick="DBZ('autumn.gif', 'theme4')">fall</a>
-        <button id="theme5" class="theme" onclick="DBZ('vaporwave.gif', 'theme5')">vw</a>
-        <button id="theme6" class="theme" onclick="DBZ('dusk.gif', 'theme6')">dusk</a>
-        <button id="theme7" class="theme" onclick="DBZ('coffee.gif', 'theme7')">winter1</a>
-        <button id="theme8" class="theme" onclick="DBZ('winter.webp', 'theme8')">winter2</a> 
-        <button id="theme9" class="theme" onclick="DBZ('8bit.gif', 'theme9')">8bit</a>
-        <button id="theme10" class="theme" onclick="DBZ('trees.png', 'theme10')">trees</a>
-        <button id="theme11" class="theme" onclick="DBZ('future.jpg', 'theme11')">future</a>
-        <button id="theme12" class="theme" onclick="DBZ('island.png', 'theme12')">island</a>
-        <button id="theme13" class="theme" onclick="DBZ('forest.jpg', 'theme13')">forest</a>
-        <button id="theme14" class="theme" onclick="DBZ('halo3.jpg', 'theme14')">halo3</a>
-        <button id="theme15" class="theme" onclick="DBZ('celeste.avif', 'theme15')">celeste</a>   
-        <button id="theme16" class="theme" onclick="DBZ('vwsunset.gif', 'theme16')">sunset</a>   
-        <button id="theme17" class="theme" onclick="DBZ('vwsunset2.jpg', 'theme17')">sunset2</a>
-        <button id="theme18" class="theme" onclick="DBZ('spring.jpg', 'theme18')">spring</a>   
-        <button id="theme19" class="theme" onclick="DBZ('spring2.jpg', 'theme19')">spring2</a>
-        <button id="theme20" class="theme" onclick="DBZ('bridge.jpg', 'theme20')">bridge</a>      
-        <button id="theme21" class="theme" onclick="DBZ('watersplash.png', 'theme21')">splash</a>
-        <button id="theme22" class="theme" onclick="DBZ('beach.gif', 'theme22')">beach</a>      
-        <button id="theme23" class="theme" onclick="DBZ('sunset.jpg', 'theme23')">pier</a>      
-        <button id="theme24" class="theme" onclick="DBZ('autumn.jpg', 'theme24')">fall2</a>      
-    </div>
-</div>
-        
-    <iframe src="https://giphy.com/embed/jbN8TR74FTLb2" width="240" height="175" style="display: none; border-radius: 30px; position: absolute; top: 8px; left: 0" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/its-the-great-pumpkin-charlie-brown-linus-van-pelt-charles-m-schulz-jbN8TR74FTLb2"></a></p>
-    <iframe src="https://giphy.com/embed/fsnzYr1pgvAQM" width="240" height="175" style="display: none; border-radius: 30px; position: absolute; top: 0; right: 0" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/peanuts-halloween-charlie-brown-great-pumpkin-fsnzYr1pgvAQM"></a></p>
-    <div id="felloButtons" style="display: flex; justify-content: center; align-items: center; height: 35px;">
-        
-        <a href="https://ims.fello.com/items/list" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; justify-content: center; line-height: 30px;"><h4 style="background-color: white; color: black; width: 30px; height: 30px; margin-left: 15px; border-radius: 16px; text-align: center;">I.M.</h4></a>
-        <a style="margin-top: 4px; margin-left: 10px; margin-right: 10px;" href="https://ims.fello.com" target="_blank" rel="noopener noreferrer"><img class="fello" src="Fello.png"></a>
-        <a style="margin-top: 4px; margin-right: 10px;" href="https://thingspace.verizonwireless.com/Portal/manage/dashboard" target="_blank" rel="noopener noreferrer"><img class="fello" src="verizon.jpg" style="border-radius: 16px;"></a>
-        <a style="margin-top: 4px; margin-right: 10px;" href="https://business.apple.com/#/main/users" target="_blank" rel="noopener noreferrer"><img class="fello" src="apple.png" style="border-radius: 16px;"></a>
-        <a href="https://a.simplemdm.com/admin/v2/devices?group=&order=&orderD=desc&page=0&per=100&saveQuery=true&search=" target="_blank" rel="noopener noreferrer"><img class="fello" src="mdm.png" style="border-radius: 16px; margin-top: 4px;"></a><br>
-        <a href="https://ims.fello.com/reports" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: flex; justify-content: center; line-height: 30px;"><h4 style="background-color: white; color: black; width: 30px; height: 30px; margin-left: 10px; border-radius: 16px; text-align: center;">R</h4></a>
-        
-    </div>
+    <body>
+        <div id="leaves" class="leaves"></div>
 
-    <div class="blob" style="margin: 10px auto;" ><a href="https://my.iamwebbing.com/pages/dashboards/customers.aspx" target="_blank" rel="noopener noreferrer" ><img src="webbing.png" style="width: 130px; height: 50px; margin-left: 5px;"></a></div>                  
-        
-    <div id="snackbar">Copied to clipboard</div>
-    <!-- Duplicate feature -->
-    <div id="snackbar2">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <img src="copy.png" class="textButton" onclick="copyCSV(boxxxx)">
-            <img src="close.png" id="snackButton" class="textButton">
+        <div id="ravens" class="leaves" style="display: none;"></div>
+
+        <div id="christmas" class="leaves" style="display: none;"></div>
+
+        <div class="dropdown" id="dropdown">
+            <button id="FelloButton" class="dropbtn">Theme</button>
+
+            <div class="dropdown-content"></div>
         </div>
-        
-        Duplicates found
-        <br>
-        <br>
-        <textarea id="boxxxx" style="display: flex; justify-content: center; align-items: center;" ></textarea>
-    </div>
-    
-    <div id="added">+1 Added</div>
-    <div id="removed">-1 Removed</div>
-    <div id="newButtonCont2" style="display: flex; justify-content: center; align-items: center; margin-bottom: 13px; gap: 40px; margin-left: auto; margin-right: auto;">
-        <!-- <img onclick="createForm()" src="plus.jpg" style="cursor: pointer; height: 20px;display: block; margin-left: auto; margin-right: auto; width: 23px; margin-bottom: 15px;" > -->
-        <!-- <img id="createFormButton" onclick="createForm()" src="plus.jpg" style="cursor: pointer; height: 20px;width: 23px; margin-right: 10px;" > -->
-        <!-- <button id="removebutton" onclick="hideRemoval()" style="width: 54px; height: 30px; text-align: center;">Hide</button> -->
-        <img src="hashtag.png" id="addOrderButton" class="textButton" style="border-radius: 24px;" onclick="addOrders()">
-        <img src="add.png" id="createFormButton" class="textButton" style="border-radius: 24px;" onclick="createForm()">
-        <img src="hide.png" id="removebutton" class="textButton" onclick="hideRemoval()">
-    </div>
-    
-    <!-- <div style="display: flex; background-color: white; color: black; width: 95px; align-items: center; height: 30px;"><h3>Total: <h3 id="total"></h3></h3></div> -->
-    
-    <div id="magic" style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
-        
-        <div class="node0" style="margin-top: 25px; animation: fadeIn 1.5s;">
-            <div class="info">
-                <label for="order"><b>Order# </b></label><br>
-                <input type="text" name="order" id="order" placeholder="SQ1234"><br>
-                <!-- <button onclick="eraseText(box,boxx,order)" style="width: 60px;" >Clear</button>
-                <button onclick="edit(order)" style="width: 55px;">Edit</button>
-                <button  onclick="checkout(order)">Checkout</button>
-                <button onclick="copyCSV(boxx)">CopyCSV</button> -->
-                <div class="newButtonCont" style="display: flex;background: white; width: 296px; justify-content: space-between; border-radius: 16px;">
-                    <img id="textButton" src="clear.png" class="textButton" onclick="eraseText(box,boxx,order)">
-                    <img id="textButton" src="edit.png" class="textButton" onclick="edit(order)">
-                    <img id="textButton" src="checkout.png" class="textButton" onclick="checkout(order,textButton)">
-                    <img id="textButton" src="copy.png" class="textButton" onclick="copyCSV(boxx)">
-                    <img class="textButton" src="mdm.png" style="border-radius: 16px;" onclick="openMdm(order)">
-                </div>                
+            
+        <iframe 
+            src="https://giphy.com/embed/jbN8TR74FTLb2" 
+            width="240" 
+            height="175" 
+            style="display: none; border-radius: 30px; position: absolute; top: 8px; left: 0" 
+            frameBorder="0" 
+            class="giphy-embed" 
+            allowFullScreen
+        >
+        </iframe>
+
+        <iframe 
+            src="https://giphy.com/embed/fsnzYr1pgvAQM" 
+            width="240" 
+            height="175" 
+            style="display: none; border-radius: 30px; position: absolute; top: 0; right: 0" 
+            frameBorder="0" 
+            class="giphy-embed" 
+            allowFullScreen
+        >
+        </iframe>
+
+        <div id="felloButtons" style="display: flex; justify-content: center; align-items: center; height: 35px;">            
+            <a 
+                href="https://ims.fello.com/items/list" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style="text-decoration: none; display: flex; justify-content: center; line-height: 30px;"
+            >
+                <h4 id="FelloButton" style="background-color: white; color: black; width: 30px; height: 30px; margin-left: 15px; border-radius: 16px; text-align: center;">I.M.</h4>
+            </a>
+
+            <a 
+                style="margin-top: 4px; margin-left: 10px; margin-right: 10px;" 
+                href="https://ims.fello.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+            >
+                <img id="FelloButton" class="fello" style="width: 30px; height: 30px; border-radius: 16px;" src="images/Fello.png">
+            </a>
+
+            <a 
+                style="margin-top: 4px; margin-right: 10px;" 
+                href="https://thingspace.verizonwireless.com/Portal/manage/dashboard" 
+                target="_blank" 
+                rel="noopener noreferrer"
+            >
+                <img id="FelloButton" class="fello" src="images/verizon.jpg" style="border-radius: 16px;">
+            </a>
+
+            <a 
+                style="margin-top: 4px; margin-right: 10px;" 
+                href="https://business.apple.com/#/main/users" 
+                target="_blank" 
+                rel="noopener noreferrer"
+            >
+                <img id="FelloButton" class="fello" src="images/apple.png" style="border-radius: 16px;">
+            </a>
+
+            <a 
+                href="https://a.simplemdm.com/admin/v2/devices?group=&order=&orderD=desc&page=0&per=100&saveQuery=true&search=" 
+                target="_blank" 
+                rel="noopener noreferrer"
+            >
+                <img id="FelloButton" class="fello" src="images/mdm.png" style="border-radius: 16px; margin-top: 4px;">
+            </a>
+            
+            <br>
+
+            <a 
+                href="https://ims.fello.com/reports" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style="text-decoration: none; display: flex; justify-content: center; line-height: 30px;"
+            >
+                <h4 id="FelloButton" style="background-color: white; color: black; width: 30px; height: 30px; margin-left: 10px; border-radius: 16px; text-align: center;">R</h4>
+            </a> 
+        </div>
+
+        <div 
+            class="blob" 
+            style="margin: 10px auto;" 
+        >
+            <a href="https://my.iamwebbing.com/pages/dashboards/customers.aspx" target="_blank" rel="noopener noreferrer" >
+                <img src="images/webbing.png" style="width: 130px; height: 50px; margin-left: 5px;">
+            </a>
+        </div>                  
+            
+        <div id="snackbar">Copied to clipboard</div>
+        <!-- Duplicate feature -->
+        <div id="snackbar2">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <img src="images/copy.png" class="textButton" onclick="copyCSV(boxxxx)" style="width: 30px; height: 30px;">
+
+                <img src="images/close.png" id="snackButton" class="textButton" style="width: 30px; height: 30px;"">
             </div>
             
-            <div style="display: flex; margin: 0px; padding: 0px;">
-                <textarea id="box" cols="20" rows="30" placeholder="Enter (or paste) your column of data here"></textarea>
-                <textarea id="boxx" cols="20" rows="30"  placeholder="Your comma separated list of data will appear here"></textarea>
-                <div id="removal">
-                    <div class="newButtonCont" style="display: flex;background: white; width: 166px; justify-content: space-evenly; border-radius: 16px;">
-                        <!-- <button onclick="eraseText(boxxx)" style="width: 60px;" >Clear</button> -->
-                        <!-- <button onclick="copyCSV(boxxx)" style="width: 60px;">Copy</button> -->
-                        <img src="clear.png" class="textButton" onclick="eraseText(boxxx)">
-                        <img src="copy.png" class="textButton" onclick="copyCSV(boxxx)">
-                    </div>
-                    <textarea id="boxxx" cols="20" rows="30"  placeholder="The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets 
-                    more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets 
-                    faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound. [ding] Remember to run in a 
-                    straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on 
-                    the word start. On your mark, get ready, start." style="height: 600px;"></textarea>
-                    <div id="line">
-                        <p>Count: </p>
-                        <p id="count0"></p>
+            Duplicates found
+            <br>
+            <br>
+            <textarea id="boxxxx" style="display: flex; justify-content: center; align-items: center;" ></textarea>
+        </div>
+        
+        <div id="added">+1 Added</div>
+
+        <div id="removed">-1 Removed</div>
+
+        <div id="newButtonCont2" style="display: flex; justify-content: center; align-items: center; margin-bottom: 13px; gap: 40px; margin-left: auto; margin-right: auto;">
+            <img src="images/hashtag.png" id="addOrderButton" class="textButton" style="border-radius: 24px;" onclick="addOrders()">
+
+            <img src="images/add.png" id="createFormButton" class="textButton" style="border-radius: 24px;" onclick="createForm()">
+
+            <img src="images/hide.png" id="removebutton" class="textButton" onclick="hideRemoval()">
+        </div>                
+        
+        <div id="magic" style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
+            
+            <div class="node0" style="margin-top: 25px; animation: fadeIn 1.5s;">
+                <div class="info">
+                    <label for="order"><b>Order# </b></label><br>
+
+                    <input type="text" name="order" id="order" placeholder="SQ1234"><br>
+
+                    <div class="newButtonCont" style="display: flex;background: white; width: 296px; justify-content: space-between; border-radius: 16px;">
+                        <img id="textButton" src="images/clear.png" class="textButton" onclick="eraseText(box,boxx,order)">
+
+                        <img id="textButton" src="images/edit.png" class="textButton" onclick="openLink(order, 'edit')">
+
+                        <img id="textButton" src="images/checkout.png" class="textButton" onclick="openLink(order, 'checkout')">
+
+                        <img id="textButton" src="images/copy.png" class="textButton" onclick="copyCSV(boxx)">
+
+                        <img class="textButton" src="images/mdm.png" style="border-radius: 16px;" onclick="openLink(order, 'mdm')">
+                    </div>                
+                </div>
+                
+                <div style="display: flex; margin: 0px; padding: 0px;">
+                    <textarea id="box" cols="20" rows="30" placeholder="Enter (or paste) your column of data here"></textarea>
+
+                    <textarea id="boxx" cols="20" rows="30"  placeholder="Your comma separated list of data will appear here"></textarea>
+
+                    <div id="removal">
+                        <div class="newButtonCont" style="display: flex;background: white; width: 166px; justify-content: space-evenly; border-radius: 16px;">
+                            <img src="images/clear.png" class="textButton" onclick="eraseText(boxxx)">
+                            <img src="images/copy.png" class="textButton" onclick="copyCSV(boxxx)">
+                        </div>
+
+                        <textarea id="boxxx" cols="20" rows="30"  placeholder="The FitnessGram™ Pacer Test is a multistage aerobic capacity test that progressively gets 
+                        more difficult as it continues. The 20 meter pacer test will begin in 30 seconds. Line up at the start. The running speed starts slowly, but gets 
+                        faster each minute after you hear this signal. [beep] A single lap should be completed each time you hear this sound. [ding] Remember to run in a 
+                        straight line, and run as long as possible. The second time you fail to complete a lap before the sound, your test is over. The test will begin on 
+                        the word start. On your mark, get ready, start." style="height: 600px;"></textarea>
+
+                        <div id="line">
+                            <p>Count: </p>
+
+                            <p id="count0"></p>
+                        </div>
                     </div>
                 </div>
+                
+                <div id="line">
+                    <p>Line Count: </p>
+
+                    <p id="count1"></p>
+                </div>                
             </div>
-            
-            <div id="line">
-                <p>Line Count: </p>
-                <p id="count1"></p>
-            </div>
-            
         </div>
-
-    </div>    
-    
-</body>
+        
+        <h3 id="emailh">
+            <div class="loop-wrapper">
+                <div class="mountain"></div>
+                <div class="hill"></div>
+                <div class="tree1"></div>
+                <div class="tree2"></div>
+                <div class="tree3"></div>
+                <div class="rock"></div>
+                <div class="truck"></div>
+                <div class="wheels"></div>
+            </div> 
+        </h3>
+    </body>
 </html>
-
-
