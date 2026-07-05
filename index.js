@@ -1,3 +1,37 @@
+const themes = [
+    {id: "original", label: "Original", action: () => changeCol("black", "red", "original")},
+    {id: "dark", label: "Dark", action: () => changeCol("black", "white", "dark")},
+    {id: "theme1", label: "Jay", image: "vegeta.jpg", mode: "ravens", contain: true},
+    {id: "theme2", label: "fw", image: "fw.png"},
+    {id: "theme3", label: "japan", image: "japan.gif"},
+    {id: "theme4", label: "fall", image: "autumn.gif"},
+    {id: "theme5", label: "vw", image: "vaporwave.gif"},
+    {id: "theme6", label: "dusk", image: "dusk.gif"},
+    {id: "theme7", label: "winter1", image: "coffee.gif", mode: "christmas"},
+    {id: "theme8", label: "winter2", image: "winter.webp", mode: "christmas"},
+    {id: "theme9", label: "8bit", image: "8bit.gif"},
+    {id: "theme10", label: "trees", image: "trees.png"},
+    {id: "theme11", label: "future", image: "future.jpg"},
+    {id: "theme12", label: "island", image: "island.png"},
+    {id: "theme13", label: "forest", image: "forest.jpg"},
+    {id: "theme14", label: "halo3", image: "halo3.jpg"},
+    {id: "theme15", label: "celeste", image: "celeste.avif"},
+    {id: "theme16", label: "sunset", image: "vwsunset.gif"},
+    {id: "theme17", label: "sunset2", image: "vwsunset2.jpg"},
+    {id: "theme18", label: "spring", image: "spring.jpg"},
+    {id: "theme19", label: "spring2", image: "spring2.jpg"},
+    {id: "theme20", label: "bridge", image: "bridge.jpg"},
+    {id: "theme21", label: "splash", image: "watersplash.png"},
+    {id: "theme22", label: "beach", image: "beach.gif"},
+    {id: "theme23", label: "pier", image: "sunset.jpg"},
+    {id: "theme24", label: "fall2", image: "autumn.jpg"},
+    {id: "theme25", label: "summer1", image: "summer1.jpg"},
+    {id: "theme26", label: "summer2", image: "summer2.jpg"},
+    {id: "theme27", label: "xbox", image: "xboxGreen.jpg"},
+    {id: "theme28", label: "pstation", image: "playstation.png"},
+    {id: "theme29", label: "blackops", image: "blackops.jpg"},
+];
+
 const initialColorState = {
     boxBg: null,
     boxText: null,
@@ -745,39 +779,6 @@ window.addEventListener("beforeunload", () => {
         
     return '';
 });
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const themes = [
-    {id: "original", label: "Original", action: () => changeCol("black", "red", "original")},
-    {id: "dark", label: "Dark", action: () => changeCol("black", "white", "dark")},
-    {id: "theme1", label: "Jay", image: "vegeta.jpg", mode: "ravens", contain: true},
-    {id: "theme2", label: "fw", image: "fw.png"},
-    {id: "theme3", label: "japan", image: "japan.gif"},
-    {id: "theme4", label: "fall", image: "autumn.gif"},
-    {id: "theme5", label: "vw", image: "vaporwave.gif"},
-    {id: "theme6", label: "dusk", image: "dusk.gif"},
-    {id: "theme7", label: "winter1", image: "coffee.gif", mode: "christmas"},
-    {id: "theme8", label: "winter2", image: "winter.webp", mode: "christmas"},
-    {id: "theme9", label: "8bit", image: "8bit.gif"},
-    {id: "theme10", label: "trees", image: "trees.png"},
-    {id: "theme11", label: "future", image: "future.jpg"},
-    {id: "theme12", label: "island", image: "island.png"},
-    {id: "theme13", label: "forest", image: "forest.jpg"},
-    {id: "theme14", label: "halo3", image: "halo3.jpg"},
-    {id: "theme15", label: "celeste", image: "celeste.avif"},
-    {id: "theme16", label: "sunset", image: "vwsunset.gif"},
-    {id: "theme17", label: "sunset2", image: "vwsunset2.jpg"},
-    {id: "theme18", label: "spring", image: "spring.jpg"},
-    {id: "theme19", label: "spring2", image: "spring2.jpg"},
-    {id: "theme20", label: "bridge", image: "bridge.jpg"},
-    {id: "theme21", label: "splash", image: "watersplash.png"},
-    {id: "theme22", label: "beach", image: "beach.gif"},
-    {id: "theme23", label: "pier", image: "sunset.jpg"},
-    {id: "theme24", label: "fall2", image: "autumn.jpg"},
-    {id: "theme25", label: "summer1", image: "summer1.jpg"},
-    {id: "theme26", label: "summer2", image: "summer2.jpg"},
-];
 
 const renderThemes = () => {
     const container = document.querySelector(".dropdown-content");
