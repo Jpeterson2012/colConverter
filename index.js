@@ -31,6 +31,7 @@ const themes = [
     {id: "theme28", label: "pstation", image: "playstation.png"},
     {id: "theme29", label: "nintendo", image: "nintendo.jpg"},
     {id: "theme30", label: "blackops", image: "blackops.jpg"},
+    {id: "theme31", label: "Jay2", image: "ravens3.png"},
 ];
 
 const initialColorState = {
